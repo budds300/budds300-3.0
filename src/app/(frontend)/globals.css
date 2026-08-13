@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+:root {
+  --background: #08090d;
+  --background-elevated: #0f1117;
+  --background-elevated-solid: #000000;
+  --foreground: #f4f5f7;
+  --muted: #9aa0ac;
+  --border: #1e212b;
+  --accent: #b6ff3c;
+  --accent-secondary: #8fe030;
+  --accent-foreground: #08090d;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-elevated: var(--background-elevated);
+  --color-background-elevated-solid: var(--background-elevated-solid);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-foreground: var(--accent-foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .bg-grid {
+    background-image:
+      linear-gradient(
+        to right,
+        color-mix(in srgb, var(--foreground) 6%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--foreground) 6%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 44px 44px;
+  }
+
+  .card {
+    background: var(--background-elevated);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent), 0 0 32px -8px var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .icon-tile {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--accent) 16%, var(--background-elevated));
+    border: 1px solid var(--border);
+    color: var(--accent-secondary);
+  }
+
+  .icon-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 9999px;
+    background: var(--foreground);
+    color: var(--background);
+  }
+
+  .arch-frame {
+    position: relative;
+    border-radius: 999px 999px 1rem 1rem;
+    padding: 6px;
+    background: linear-gradient(
+      180deg,
+      var(--accent) 0%,
+      color-mix(in srgb, var(--accent) 40%, transparent) 60%,
+      transparent 100%
+    );
+  }
+
+  .arch-frame > * {
+    border-radius: 999px 999px 0.75rem 0.75rem;
+    overflow: hidden;
+  }
+
+  .stat-tile {
+    background: var(--background-elevated);
+    border: 1px solid var(--border);
+    border-radius: 1.25rem;
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 32px color-mix(in srgb, var(--accent) 65%, transparent);
+  }
+
+  .btn-glow {
+    box-shadow: 0 0 24px -6px var(--accent);
+  }
+
+  .btn-glow:hover {
+    box-shadow: 0 0 40px -4px var(--accent);
+  }
+}
