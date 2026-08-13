@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { GlobalSetting, Media } from "@/payload-types";
+import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
+import { MotionAnchor } from "@/components/motion/MotionButton";
 
 const FALLBACK_HEADLINE = "Full-Stack / Software Engineer";
 const FALLBACK_BIO =
@@ -38,64 +40,74 @@ export function Hero({ settings }: { settings: GlobalSetting | null }) {
         aria-hidden
       />
       <div className="relative mx-auto grid max-w-5xl grid-cols-1 items-center gap-12 px-6 py-28 sm:py-36 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="flex flex-col items-start gap-6">
-          <span className="rounded-full border border-border bg-background-elevated px-4 py-1 text-sm text-muted">
-            Available for new projects
-          </span>
-          <h1 className="glow-text max-w-3xl text-4xl font-extrabold tracking-tight sm:text-6xl">
-            {headline}
-          </h1>
-          <p className="max-w-2xl text-lg text-muted">{bio}</p>
-          <div className="flex flex-wrap items-center gap-4 pt-2">
-            {whatsappHref ? (
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-glow flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-accent-foreground transition-transform hover:-translate-y-0.5"
-              >
-                <WhatsAppIcon />
-                Chat on WhatsApp
-              </a>
-            ) : (
+        <StaggerGroup className="flex flex-col items-start gap-6" stagger={0.14}>
+          <StaggerItem>
+            <span className="rounded-full border border-border bg-background-elevated px-4 py-1 text-sm text-muted">
+              Available for new projects
+            </span>
+          </StaggerItem>
+          <StaggerItem>
+            <h1 className="max-w-3xl text-4xl font-extrabold tracking-tight sm:text-6xl">
+              {headline}
+            </h1>
+          </StaggerItem>
+          <StaggerItem>
+            <p className="max-w-2xl text-lg text-muted">{bio}</p>
+          </StaggerItem>
+          <StaggerItem className="flex flex-wrap items-center gap-4 pt-2">
+            <>
+              {whatsappHref ? (
+                <MotionAnchor
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-glow flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-accent-foreground"
+                >
+                  <WhatsAppIcon />
+                  Chat on WhatsApp
+                </MotionAnchor>
+              ) : (
+                <Link
+                  href="#contact"
+                  className="btn-glow rounded-full bg-accent px-6 py-3 font-medium text-accent-foreground transition-transform hover:-translate-y-0.5"
+                >
+                  Let&apos;s Talk
+                </Link>
+              )}
               <Link
-                href="#contact"
-                className="btn-glow rounded-full bg-accent px-6 py-3 font-medium text-accent-foreground transition-transform hover:-translate-y-0.5"
-              >
-                Let&apos;s Talk
-              </Link>
-            )}
-            <Link
-              href="#pricing"
-              className="rounded-full border border-border px-6 py-3 font-medium transition-colors hover:border-accent"
-            >
-              See Pricing
-            </Link>
-            {resume ? (
-              <a
-                href={resume}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#pricing"
                 className="rounded-full border border-border px-6 py-3 font-medium transition-colors hover:border-accent"
               >
-                Download CV
-              </a>
-            ) : null}
-          </div>
-        </div>
+                See Pricing
+              </Link>
+              {resume ? (
+                <MotionAnchor
+                  href={resume}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-border px-6 py-3 font-medium"
+                >
+                  Download CV
+                </MotionAnchor>
+              ) : null}
+            </>
+          </StaggerItem>
+        </StaggerGroup>
         {profileImage?.url ? (
-          <div className="arch-frame mx-auto w-full max-w-xs">
-            <div className="relative aspect-[3/4] w-full bg-background-elevated">
-              <Image
-                src={profileImage.url}
-                alt={profileImage.alt || "Profile photo"}
-                fill
-                sizes="(min-width: 1024px) 24rem, 20rem"
-                className="object-cover"
-                priority
-              />
+          <Reveal x={40} delay={0.2} className="relative mx-auto w-full max-w-xs">
+            <div className="arch-frame w-full">
+              <div className="relative aspect-[3/4] w-full bg-background-elevated">
+                <Image
+                  src={profileImage.url}
+                  alt={profileImage.alt || "Profile photo"}
+                  fill
+                  sizes="(min-width: 1024px) 24rem, 20rem"
+                  className="object-cover"
+                  priority
+                />
+              </div>
             </div>
-          </div>
+          </Reveal>
         ) : null}
       </div>
     </section>

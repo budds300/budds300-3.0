@@ -1,4 +1,5 @@
 import type { ServiceOffering } from "@/payload-types";
+import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 
 const ICONS: Record<ServiceOffering["icon"], React.ReactNode> = {
   web: (
@@ -60,18 +61,21 @@ export function ServiceOfferings({
 
   return (
     <section id="what-i-do" className="mx-auto max-w-5xl px-6 py-24">
-      <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-        What I Do
-      </h2>
-      <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <Reveal>
+        <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
+          What I Do
+        </h2>
+      </Reveal>
+      <StaggerGroup className="mt-10 grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
         {offerings.map((offering) => (
-          <div key={offering.id} className="card p-6">
-            <span className="icon-tile">{ICONS[offering.icon]}</span>
+          <StaggerItem key={offering.id}>
+            <span className="text-accent">{ICONS[offering.icon]}</span>
             <h3 className="mt-4 text-lg font-medium">{offering.title}</h3>
-            <p className="mt-2 text-muted">{offering.description}</p>
-          </div>
+            <div className="mt-2 mb-3 h-px w-10 bg-border" aria-hidden />
+            <p className="text-muted">{offering.description}</p>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerGroup>
     </section>
   );
 }

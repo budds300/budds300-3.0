@@ -1,23 +1,32 @@
 import Image from "next/image";
 import type { Media, Project } from "@/payload-types";
+import { Reveal } from "@/components/motion/Reveal";
 
 export function Projects({ projects }: { projects: Project[] }) {
   if (projects.length === 0) return null;
 
   return (
     <section id="projects" className="mx-auto max-w-5xl px-6 py-24">
-      <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-        Featured Projects
-      </h2>
+      <Reveal>
+        <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
+          Featured Projects
+        </h2>
+      </Reveal>
       <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
-        {projects.map((project) => {
+        {projects.map((project, i) => {
           const cover =
             typeof project.coverImage === "object"
               ? (project.coverImage as Media)
               : null;
 
           return (
-            <article key={project.id} className="card overflow-hidden">
+            <Reveal
+              key={project.id}
+              as="article"
+              y={0}
+              x={i % 2 === 0 ? -32 : 32}
+              className="card overflow-hidden"
+            >
               {cover?.url ? (
                 <div className="relative aspect-video w-full">
                   <Image
@@ -67,7 +76,7 @@ export function Projects({ projects }: { projects: Project[] }) {
                   ) : null}
                 </div>
               </div>
-            </article>
+            </Reveal>
           );
         })}
       </div>

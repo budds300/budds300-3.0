@@ -52,16 +52,11 @@ body {
     background: var(--background-elevated);
     border: 1px solid var(--border);
     border-radius: 1rem;
-    transition:
-      border-color 0.2s ease,
-      box-shadow 0.2s ease,
-      transform 0.2s ease;
+    transition: border-color 0.2s ease;
   }
 
   .card:hover {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 1px var(--accent), 0 0 32px -8px var(--accent);
-    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--accent) 50%, var(--border));
   }
 
   .icon-tile {
@@ -71,9 +66,17 @@ body {
     width: 2.75rem;
     height: 2.75rem;
     border-radius: 0.75rem;
-    background: color-mix(in srgb, var(--accent) 16%, var(--background-elevated));
-    border: 1px solid var(--border);
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
     color: var(--accent-secondary);
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
   .icon-badge {
@@ -104,23 +107,19 @@ body {
     overflow: hidden;
   }
 
+  .frame-accent {
+    border-radius: 1.25rem;
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+  }
+
   .stat-tile {
     background: var(--background-elevated);
-    border: 1px solid var(--border);
     border-radius: 1.25rem;
     padding: 2rem 1.5rem;
     text-align: center;
   }
 
-  .glow-text {
-    text-shadow: 0 0 32px color-mix(in srgb, var(--accent) 65%, transparent);
-  }
-
   .btn-glow {
-    box-shadow: 0 0 24px -6px var(--accent);
-  }
-
-  .btn-glow:hover {
-    box-shadow: 0 0 40px -4px var(--accent);
+    transition: transform 0.2s ease;
   }
 }

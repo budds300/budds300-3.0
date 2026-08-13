@@ -29,5 +29,25 @@ export const Testimonials: CollectionConfig = {
       type: "textarea",
       required: true,
     },
+    {
+      name: "rating",
+      type: "number",
+      required: true,
+      min: 1,
+      max: 5,
+      defaultValue: 5,
+    },
+    {
+      name: "platform",
+      type: "select",
+      required: true,
+      defaultValue: "Upwork",
+      options: [
+        { label: "Upwork", value: "Upwork" },
+        { label: "LinkedIn", value: "LinkedIn" },
+        { label: "Google", value: "Google" },
+        { label: "Direct", value: "Direct" },
+      ],
+    },
   ],
 };

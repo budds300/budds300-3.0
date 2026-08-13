@@ -265,6 +265,8 @@ export interface Testimonial {
   roleCompany: string;
   avatar?: (number | null) | Media;
   quote: string;
+  rating: number;
+  platform: 'Upwork' | 'LinkedIn' | 'Google' | 'Direct';
   updatedAt: string;
   createdAt: string;
 }
@@ -501,6 +503,8 @@ export interface TestimonialsSelect<T extends boolean = true> {
   roleCompany?: T;
   avatar?: T;
   quote?: T;
+  rating?: T;
+  platform?: T;
   updatedAt?: T;
   createdAt?: T;
 }

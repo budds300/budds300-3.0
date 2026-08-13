@@ -1,3 +1,5 @@
+import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
+
 const STACK = [
   {
     category: "Frontend",
@@ -50,29 +52,31 @@ const STACK = [
 export function TechStackGrid() {
   return (
     <section id="stack" className="mx-auto max-w-5xl px-6 py-24">
-      <span className="text-sm font-medium uppercase tracking-wider text-accent">
-        My Skills
-      </span>
-      <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-        Tech Stack
-      </h2>
-      <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <Reveal>
+        <span className="text-sm font-medium uppercase tracking-wider text-accent">
+          My Skills
+        </span>
+        <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
+          Tech <span className="font-medium text-muted">Stack</span>
+        </h2>
+      </Reveal>
+      <StaggerGroup className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {STACK.map((group) => (
-          <div key={group.category} className="card p-6">
+          <StaggerItem key={group.category} className="card p-6">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-medium">{group.category}</h3>
               <span className="icon-badge text-accent-foreground">{group.icon}</span>
             </div>
-            <div className="mt-4 border-t border-border pt-4">
+            <div className="mt-4 border-t border-border/60 pt-4">
               <ul className="space-y-2 text-muted">
                 {group.items.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
             </div>
-          </div>
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerGroup>
     </section>
   );
 }

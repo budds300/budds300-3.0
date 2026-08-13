@@ -1,4 +1,6 @@
 import type { Service } from "@/payload-types";
+import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
+import { MotionAnchor } from "@/components/motion/MotionButton";
 
 const INTERVAL_LABEL: Record<Service["billingInterval"], string> = {
   "one-time": "one-time",
@@ -13,18 +15,20 @@ export function Pricing({ services }: { services: Service[] }) {
 
   return (
     <section id="pricing" className="mx-auto max-w-5xl px-6 py-24">
-      <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-        Services & Pricing
-      </h2>
-      <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
+      <Reveal>
+        <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
+          Services & Pricing
+        </h2>
+      </Reveal>
+      <StaggerGroup className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
         {services.map((service, i) => {
           const highlighted = i === highlightIndex;
           return (
-            <div
+            <StaggerItem
               key={service.id}
               className={
                 highlighted
-                  ? "flex flex-col rounded-2xl border border-accent bg-background-elevated-solid p-6 shadow-[0_0_40px_-8px_var(--accent)]"
+                  ? "flex flex-col rounded-2xl bg-background-elevated-solid p-6 ring-1 ring-accent/40"
                   : "card flex flex-col p-6"
               }
             >
@@ -46,16 +50,16 @@ export function Pricing({ services }: { services: Service[] }) {
                   ))}
                 </ul>
               ) : null}
-              <a
+              <MotionAnchor
                 href={service.ctaLink}
                 className="btn-glow mt-6 rounded-full bg-accent px-5 py-2.5 text-center font-medium text-accent-foreground"
               >
                 Book Now
-              </a>
-            </div>
+              </MotionAnchor>
+            </StaggerItem>
           );
         })}
-      </div>
+      </StaggerGroup>
     </section>
   );
 }

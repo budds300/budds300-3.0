@@ -1,5 +1,6 @@
-import Image from "next/image";
-import type { Media, Testimonial } from "@/payload-types";
+import type { Testimonial } from "@/payload-types";
+import { Reveal } from "@/components/motion/Reveal";
+import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 
 export function Testimonials({
   testimonials,
@@ -9,39 +10,17 @@ export function Testimonials({
   if (testimonials.length === 0) return null;
 
   return (
-    <section id="testimonials" className="mx-auto max-w-5xl px-6 py-24">
-      <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-        What Clients Say
-      </h2>
-      <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {testimonials.map((t) => {
-          const avatar =
-            t.avatar && typeof t.avatar === "object"
-              ? (t.avatar as Media)
-              : null;
+    <section id="testimonials" className="py-24">
+      <Reveal className="mx-auto max-w-5xl px-6">
+        <span className="text-sm font-medium uppercase tracking-wider text-accent">
+          Clients Testimonial
+        </span>
+        <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
+          What My Clients Say
+        </h2>
+      </Reveal>
 
-          return (
-            <figure key={t.id} className="card p-6">
-              <blockquote className="text-muted">&ldquo;{t.quote}&rdquo;</blockquote>
-              <figcaption className="mt-4 flex items-center gap-3">
-                {avatar?.url ? (
-                  <Image
-                    src={avatar.url}
-                    alt={avatar.alt || t.clientName}
-                    width={40}
-                    height={40}
-                    className="rounded-full object-cover"
-                  />
-                ) : null}
-                <div>
-                  <p className="font-medium">{t.clientName}</p>
-                  <p className="text-sm text-muted">{t.roleCompany}</p>
-                </div>
-              </figcaption>
-            </figure>
-          );
-        })}
-      </div>
+      <TestimonialsCarousel testimonials={testimonials} />
     </section>
   );
 }
