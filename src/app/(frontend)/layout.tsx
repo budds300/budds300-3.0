@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { getPayloadClient } from "@/lib/payload";
+import { getGlobalSettings } from "@/lib/frontend-data";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
+import { PageTransition } from "@/components/motion/PageTransition";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,10 +21,7 @@ const SITE_URL =
   process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3000";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const payload = await getPayloadClient();
-  const settings = await payload
-    .findGlobal({ slug: "global-settings" })
-    .catch(() => null);
+  const settings = await getGlobalSettings();
 
   const title = settings?.headline || "Full-Stack / Software Engineer";
   const description =
@@ -54,10 +52,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function RootLayout({
   children,
 }: LayoutProps<"/">) {
-  const payload = await getPayloadClient();
-  const settings = await payload
-    .findGlobal({ slug: "global-settings" })
-    .catch(() => null);
+  const settings = await getGlobalSettings();
 
   return (
     <html
@@ -67,7 +62,9 @@ export default async function RootLayout({
       <body className="min-h-full flex flex-col">
         <JsonLd settings={settings} siteUrl={SITE_URL} />
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">
+          <PageTransition>{children}</PageTransition>
+        </main>
         <Footer settings={settings} />
       </body>
     </html>

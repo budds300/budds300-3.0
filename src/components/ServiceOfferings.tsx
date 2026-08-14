@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ServiceOffering } from "@/payload-types";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 
@@ -54,27 +55,60 @@ const ICONS: Record<ServiceOffering["icon"], React.ReactNode> = {
 
 export function ServiceOfferings({
   offerings,
+  viewAllHref,
+  expanded = false,
 }: {
   offerings: ServiceOffering[];
+  viewAllHref?: string;
+  expanded?: boolean;
 }) {
   if (offerings.length === 0) return null;
 
   return (
-    <section id="what-i-do" className="mx-auto max-w-5xl px-6 py-24">
-      <Reveal>
-        <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-          What I Do
-        </h2>
+    <section id="services" className="mx-auto max-w-5xl px-6 py-24">
+      <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <span className="section-kicker">Services</span>
+          <h2 className="mt-4 text-3xl font-black tracking-tight sm:text-5xl">
+            What I Do
+          </h2>
+        </div>
+        {viewAllHref ? (
+          <Link
+            href={viewAllHref}
+            className="shrink-0 text-sm font-medium text-accent hover:underline"
+          >
+            View All &rarr;
+          </Link>
+        ) : null}
       </Reveal>
       <StaggerGroup className="mt-10 grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-        {offerings.map((offering) => (
-          <StaggerItem key={offering.id}>
-            <span className="text-accent">{ICONS[offering.icon]}</span>
-            <h3 className="mt-4 text-lg font-medium">{offering.title}</h3>
-            <div className="mt-2 mb-3 h-px w-10 bg-border" aria-hidden />
-            <p className="text-muted">{offering.description}</p>
-          </StaggerItem>
-        ))}
+        {offerings.map((offering) =>
+          expanded ? (
+            <StaggerItem key={offering.id} className="card flex flex-col p-6">
+              <span className="icon-tile">{ICONS[offering.icon]}</span>
+              <h3 className="mt-4 text-lg font-medium">{offering.title}</h3>
+              <p className="mt-2 flex-1 text-muted">{offering.description}</p>
+              {offering.slug ? (
+                <Link
+                  href={`/services/${offering.slug}`}
+                  className="mt-4 text-sm font-medium text-accent hover:underline"
+                >
+                  Learn more &rarr;
+                </Link>
+              ) : null}
+            </StaggerItem>
+          ) : (
+            <StaggerItem key={offering.id}>
+              <div className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-background-elevated text-accent">
+                {ICONS[offering.icon]}
+              </div>
+              <h3 className="mt-5 text-xl font-bold">{offering.title}</h3>
+              <div className="mt-3 mb-4 h-px w-12 bg-accent/55" aria-hidden />
+              <p className="text-muted">{offering.description}</p>
+            </StaggerItem>
+          ),
+        )}
       </StaggerGroup>
     </section>
   );

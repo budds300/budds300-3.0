@@ -74,6 +74,9 @@ export interface Config {
     'service-offerings': ServiceOffering;
     'work-experience': WorkExperience;
     testimonials: Testimonial;
+    clients: Client;
+    'tech-stack-items': TechStackItem;
+    'blog-posts': BlogPost;
     messages: Message;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -89,6 +92,9 @@ export interface Config {
     'service-offerings': ServiceOfferingsSelect<false> | ServiceOfferingsSelect<true>;
     'work-experience': WorkExperienceSelect<false> | WorkExperienceSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    clients: ClientsSelect<false> | ClientsSelect<true>;
+    'tech-stack-items': TechStackItemsSelect<false> | TechStackItemsSelect<true>;
+    'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
     messages: MessagesSelect<false> | MessagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -184,7 +190,29 @@ export interface Media {
 export interface Project {
   id: number;
   title: string;
+  /**
+   * Used in the /projects/[slug] URL.
+   */
+  slug: string;
   description: string;
+  /**
+   * Optional problem/solution narrative shown on the /projects/[slug] case-study page.
+   */
+  caseStudy?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   techStack?:
     | {
         tag: string;
@@ -224,7 +252,29 @@ export interface Service {
 export interface ServiceOffering {
   id: number;
   title: string;
+  /**
+   * Optional. Set this to give the offering its own /services/[slug] detail page.
+   */
+  slug?: string | null;
   description: string;
+  /**
+   * Optional expanded body for the /services/[slug] page.
+   */
+  detail?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   icon: 'web' | 'automation' | 'design' | 'ecommerce' | 'cms' | 'devops';
   /**
    * Lower numbers appear first.
@@ -267,6 +317,84 @@ export interface Testimonial {
   quote: string;
   rating: number;
   platform: 'Upwork' | 'LinkedIn' | 'Google' | 'Direct';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clients".
+ */
+export interface Client {
+  id: number;
+  name: string;
+  /**
+   * Optional. If empty, the client name is shown instead.
+   */
+  logo?: (number | null) | Media;
+  /**
+   * Optional URL used when the client item is clicked.
+   */
+  website?: string | null;
+  /**
+   * Lower numbers appear first.
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tech-stack-items".
+ */
+export interface TechStackItem {
+  id: number;
+  name: string;
+  /**
+   * Optional. Upload the tool's logo (square works best). Falls back to the tool's initial if left blank.
+   */
+  icon?: (number | null) | Media;
+  /**
+   * Lower numbers appear first.
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-posts".
+ */
+export interface BlogPost {
+  id: number;
+  title: string;
+  /**
+   * Used in the /blog/[slug] URL.
+   */
+  slug: string;
+  coverImage: number | Media;
+  category: string;
+  excerpt: string;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  author: string;
+  publishedDate: string;
+  /**
+   * Draft posts are excluded from /blog and /blog/[slug].
+   */
+  draft?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -334,6 +462,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'testimonials';
         value: number | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'clients';
+        value: number | Client;
+      } | null)
+    | ({
+        relationTo: 'tech-stack-items';
+        value: number | TechStackItem;
+      } | null)
+    | ({
+        relationTo: 'blog-posts';
+        value: number | BlogPost;
       } | null)
     | ({
         relationTo: 'messages';
@@ -427,7 +567,9 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface ProjectsSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   description?: T;
+  caseStudy?: T;
   techStack?:
     | T
     | {
@@ -465,7 +607,9 @@ export interface ServicesSelect<T extends boolean = true> {
  */
 export interface ServiceOfferingsSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   description?: T;
+  detail?: T;
   icon?: T;
   order?: T;
   updatedAt?: T;
@@ -505,6 +649,46 @@ export interface TestimonialsSelect<T extends boolean = true> {
   quote?: T;
   rating?: T;
   platform?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clients_select".
+ */
+export interface ClientsSelect<T extends boolean = true> {
+  name?: T;
+  logo?: T;
+  website?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tech-stack-items_select".
+ */
+export interface TechStackItemsSelect<T extends boolean = true> {
+  name?: T;
+  icon?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-posts_select".
+ */
+export interface BlogPostsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  coverImage?: T;
+  category?: T;
+  excerpt?: T;
+  body?: T;
+  author?: T;
+  publishedDate?: T;
+  draft?: T;
   updatedAt?: T;
   createdAt?: T;
 }

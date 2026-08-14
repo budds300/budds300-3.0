@@ -13,6 +13,9 @@ import { Services } from "./collections/Services";
 import { ServiceOfferings } from "./collections/ServiceOfferings";
 import { WorkExperience } from "./collections/WorkExperience";
 import { Testimonials } from "./collections/Testimonials";
+import { TechStackItems } from "./collections/TechStackItems";
+import { Blog } from "./collections/Blog";
+import { Clients } from "./collections/Clients";
 import { Messages } from "./collections/Messages";
 import { GlobalSettings } from "./globals/GlobalSettings";
 
@@ -34,6 +37,9 @@ export default buildConfig({
     ServiceOfferings,
     WorkExperience,
     Testimonials,
+    Clients,
+    TechStackItems,
+    Blog,
     Messages,
   ],
   globals: [GlobalSettings],
