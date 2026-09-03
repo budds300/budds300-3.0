@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getPayloadClient } from "@/lib/payload";
-import type { Media } from "@/payload-types";
+import { getBlogPostBySlug, getDocs } from "@/lib/frontend-data";
+import type { Media, BlogPost } from "@/payload-types";
 import { RichText } from "@/components/RichText";
 import { BlogGrid } from "@/components/BlogGrid";
 
@@ -15,15 +15,7 @@ function formatDate(iso: string) {
   });
 }
 
-async function getPost(slug: string) {
-  const payload = await getPayloadClient();
-  const { docs } = await payload.find({
-    collection: "blog-posts",
-    where: { slug: { equals: slug }, draft: { equals: false } },
-    limit: 1,
-  });
-  return docs[0] ?? null;
-}
+export const revalidate = 300;
 
 export async function generateMetadata({
   params,
@@ -31,7 +23,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPost(slug);
+  const post = await getBlogPostBySlug(slug);
   if (!post) return {};
   return {
     title: post.title,
@@ -46,11 +38,10 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = await getPost(slug);
+  const post = await getBlogPostBySlug(slug);
   if (!post) notFound();
 
-  const payload = await getPayloadClient();
-  const { docs: related } = await payload.find({
+  const related = await getDocs<BlogPost>({
     collection: "blog-posts",
     where: { slug: { not_equals: slug }, draft: { equals: false } },
     sort: "-publishedDate",
@@ -85,7 +76,7 @@ export default async function BlogPostPage({
       {cover?.url ? (
         <div className="relative mx-auto mt-10 aspect-video w-full max-w-5xl overflow-hidden rounded-2xl px-6">
           <Image
-            src={cover.url}
+            src={cover.sizes?.hero?.url || cover.url}
             alt={cover.alt || post.title}
             fill
             sizes="(min-width: 1024px) 64rem, 100vw"

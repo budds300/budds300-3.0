@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
-import { getPayloadClient } from "@/lib/payload";
+import { getDocs } from "@/lib/frontend-data";
 import { Reveal } from "@/components/motion/Reveal";
 import { BlogGrid } from "@/components/BlogGrid";
 import { CtaBanner } from "@/components/CtaBanner";
+import type { BlogPost } from "@/payload-types";
 
 export const metadata: Metadata = {
   title: "Blog",
   alternates: { canonical: "/blog" },
 };
 
+export const revalidate = 300;
+
 export default async function BlogPage() {
-  const payload = await getPayloadClient();
-  const { docs: posts } = await payload.find({
+  const posts = await getDocs<BlogPost>({
     collection: "blog-posts",
     where: { draft: { equals: false } },
     sort: "-publishedDate",

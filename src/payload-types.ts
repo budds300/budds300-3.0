@@ -107,9 +107,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     'global-settings': GlobalSetting;
+    'privacy-policy': PrivacyPolicy;
   };
   globalsSelect: {
     'global-settings': GlobalSettingsSelect<false> | GlobalSettingsSelect<true>;
+    'privacy-policy': PrivacyPolicySelect<false> | PrivacyPolicySelect<true>;
   };
   locale: null;
   widgets: {
@@ -182,6 +184,32 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    hero?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -560,6 +588,40 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        hero?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -753,6 +815,14 @@ export interface GlobalSetting {
   headline: string;
   bio: string;
   /**
+   * Logo shown in the header navigation. Falls back to the initials badge if left blank.
+   */
+  logo?: (number | null) | Media;
+  /**
+   * Browser tab icon. Square image recommended (e.g. 512x512 PNG).
+   */
+  favicon?: (number | null) | Media;
+  /**
    * Portrait shown in the hero section.
    */
   profileImage?: (number | null) | Media;
@@ -764,9 +834,46 @@ export interface GlobalSetting {
   contactDetails?: {
     email?: string | null;
     phone?: string | null;
+    /**
+     * Number used for the "Chat on WhatsApp" button, in international format (e.g. +254701048045). Falls back to Phone if left blank.
+     */
+    whatsapp?: string | null;
+    /**
+     * Pre-filled message that opens in the WhatsApp chat when a visitor taps "Chat on WhatsApp".
+     */
+    whatsappMessage?: string | null;
     linkedin?: string | null;
     github?: string | null;
     twitter?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "privacy-policy".
+ */
+export interface PrivacyPolicy {
+  id: number;
+  title: string;
+  /**
+   * Shown on the page as "Last updated".
+   */
+  lastUpdated?: string | null;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -778,6 +885,8 @@ export interface GlobalSetting {
 export interface GlobalSettingsSelect<T extends boolean = true> {
   headline?: T;
   bio?: T;
+  logo?: T;
+  favicon?: T;
   profileImage?: T;
   aboutImage?: T;
   resumePDF?: T;
@@ -786,10 +895,24 @@ export interface GlobalSettingsSelect<T extends boolean = true> {
     | {
         email?: T;
         phone?: T;
+        whatsapp?: T;
+        whatsappMessage?: T;
         linkedin?: T;
         github?: T;
         twitter?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "privacy-policy_select".
+ */
+export interface PrivacyPolicySelect<T extends boolean = true> {
+  title?: T;
+  lastUpdated?: T;
+  content?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

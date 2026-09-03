@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
-import { getPayloadClient } from "@/lib/payload";
+import { getDocs } from "@/lib/frontend-data";
 import { Reveal } from "@/components/motion/Reveal";
 import { ProjectsFilterGrid } from "@/components/ProjectsFilterGrid";
 import { CtaBanner } from "@/components/CtaBanner";
+import type { Project } from "@/payload-types";
 
 export const metadata: Metadata = {
   title: "Projects",
   alternates: { canonical: "/projects" },
 };
 
+export const revalidate = 300;
+
 export default async function ProjectsPage() {
-  const payload = await getPayloadClient();
-  const { docs: projects } = await payload.find({
+  const projects = await getDocs<Project>({
     collection: "projects",
     sort: "-featured",
     limit: 100,

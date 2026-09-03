@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { GlobalSetting, Media } from "@/payload-types";
+import type { GlobalSetting, Media, ServiceOffering } from "@/payload-types";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 import { Counter } from "@/components/motion/Counter";
-import { RotatingBadge } from "@/components/motion/RotatingBadge";
+import { SERVICE_ICONS } from "@/lib/service-icons";
+import { getYearsOfExperience } from "@/lib/experience";
 
 function MailIcon() {
   return (
@@ -30,17 +31,25 @@ function SparkIcon() {
   );
 }
 
-export function About({ settings }: { settings: GlobalSetting | null }) {
+export function About({
+  settings,
+  offerings = [],
+  viewAllHref,
+}: {
+  settings: GlobalSetting | null;
+  offerings?: ServiceOffering[];
+  viewAllHref?: string;
+}) {
   const aboutImage =
     settings?.aboutImage && typeof settings.aboutImage === "object"
       ? (settings.aboutImage as Media)
       : null;
   const email = settings?.contactDetails?.email;
+  const yearsOfExperience = getYearsOfExperience();
 
   return (
     <section id="about" className="mx-auto max-w-5xl px-6 py-24">
       <Reveal className="card relative overflow-visible p-4 sm:p-6">
-        <RotatingBadge className="absolute -right-4 -top-4 z-10 hidden sm:block" />
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
           {aboutImage?.url ? (
             <div className="relative">
@@ -54,7 +63,7 @@ export function About({ settings }: { settings: GlobalSetting | null }) {
               />
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[1.25rem] bg-background-elevated">
                 <Image
-                  src={aboutImage.url}
+                  src={aboutImage.sizes?.card?.url || aboutImage.url}
                   alt={aboutImage.alt || "About me"}
                   fill
                   sizes="(min-width: 1024px) 28rem, 100vw"
@@ -79,7 +88,7 @@ export function About({ settings }: { settings: GlobalSetting | null }) {
               and code that&apos;s easy to hand off.
             </p>
             <Link
-              href="#contact"
+              href="/contact"
               className="btn-glow mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-accent-foreground transition-transform hover:-translate-y-0.5"
             >
               Read More
@@ -89,46 +98,68 @@ export function About({ settings }: { settings: GlobalSetting | null }) {
         </div>
       </Reveal>
 
-      <StaggerGroup className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <StaggerItem className="stat-tile">
-          <p className="text-4xl font-extrabold text-accent">
-            <Counter value={6} suffix="+" />
-          </p>
-          <p className="mt-2 text-sm text-muted">Years of Experience</p>
-        </StaggerItem>
-        <StaggerItem className="stat-tile">
-          <p className="text-4xl font-extrabold text-accent">
-            <Counter value={40} suffix="+" />
-          </p>
-          <p className="mt-2 text-sm text-muted">Projects Delivered</p>
-        </StaggerItem>
-        <StaggerItem className="stat-tile">
-          <p className="text-4xl font-extrabold text-accent">
-            <Counter value={15} suffix="+" />
-          </p>
-          <p className="mt-2 text-sm text-muted">Happy Clients</p>
-        </StaggerItem>
-        {email ? (
-          <StaggerItem>
-            <a
-              href={`mailto:${email}`}
-              className="stat-tile block transition-colors hover:bg-background-elevated-solid"
-            >
-              <span className="icon-badge mx-auto text-accent-foreground">
+      <StaggerGroup className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[0.9fr_1.1fr]" stagger={0.08}>
+        <div className="flex flex-col gap-6">
+          <StaggerItem className="stat-tile flex flex-1 flex-col items-center justify-center">
+            <span className="flex h-20 w-20 items-center justify-center rounded-full bg-background-elevated-solid text-2xl font-extrabold text-foreground">
+              <Counter value={yearsOfExperience} suffix="+" />
+            </span>
+            <p className="mt-6 text-lg font-semibold">
+              Years of
+              <br />
+              Experience
+            </p>
+          </StaggerItem>
+          {email ? (
+            <StaggerItem>
+              <a
+                href={`mailto:${email}`}
+                className="stat-tile flex items-center gap-4 p-5 text-left transition-colors hover:bg-background-elevated-solid"
+              >
+                <span className="icon-badge shrink-0 bg-accent text-accent-foreground">
+                  <MailIcon />
+                </span>
+                <span>
+                  <span className="block text-sm text-muted">For any Help:</span>
+                  <span className="block truncate font-semibold">{email}</span>
+                </span>
+              </a>
+            </StaggerItem>
+          ) : (
+            <StaggerItem className="stat-tile flex items-center gap-4 p-5 text-left">
+              <span className="icon-badge shrink-0 bg-accent text-accent-foreground">
                 <MailIcon />
               </span>
-              <p className="mt-3 text-sm text-muted">For any help</p>
-              <p className="mt-1 truncate font-medium">{email}</p>
-            </a>
-          </StaggerItem>
-        ) : (
-          <StaggerItem className="stat-tile">
-            <span className="icon-badge mx-auto text-accent-foreground">
-              <MailIcon />
-            </span>
-            <p className="mt-3 text-sm text-muted">Let&apos;s talk</p>
-          </StaggerItem>
-        )}
+              <span className="font-semibold">Let&apos;s talk</span>
+            </StaggerItem>
+          )}
+        </div>
+        <div className="flex flex-col gap-6">
+          {offerings.length > 0 && viewAllHref ? (
+            <div className="flex justify-end">
+              <Link
+                href={viewAllHref}
+                className="shrink-0 text-sm font-medium text-accent hover:underline"
+              >
+                View All &rarr;
+              </Link>
+            </div>
+          ) : null}
+          <div className="grid flex-1 grid-cols-1 gap-6 sm:grid-cols-2">
+            {offerings.slice(0, 4).map((offering) => (
+              <StaggerItem
+                key={offering.id}
+                className="stat-tile flex flex-col items-center py-8 text-center"
+              >
+                <span className="text-accent">{SERVICE_ICONS[offering.icon]}</span>
+                <p className="mt-4 font-semibold">{offering.title}</p>
+                <p className="mt-1 line-clamp-2 text-sm text-muted">
+                  {offering.description}
+                </p>
+              </StaggerItem>
+            ))}
+          </div>
+        </div>
       </StaggerGroup>
     </section>
   );

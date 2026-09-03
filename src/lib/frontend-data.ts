@@ -2,6 +2,7 @@ import { cache } from "react";
 import type { CollectionSlug, SelectType, Where } from "payload";
 import { unstable_cache } from "next/cache";
 import { getPayloadClient } from "@/lib/payload";
+import type { Project, ServiceOffering, BlogPost } from "@/payload-types";
 
 const REVALIDATE_SECONDS = 300;
 
@@ -47,15 +48,26 @@ export const getGlobalSettings = unstable_cache(
   { revalidate: REVALIDATE_SECONDS, tags: ["global-settings"] },
 );
 
+export const getPrivacyPolicy = unstable_cache(
+  async () => {
+    const payload = await getPayloadClient();
+    return payload
+      .findGlobal({ slug: "privacy-policy", depth: 1 })
+      .catch(() => null);
+  },
+  ["privacy-policy"],
+  { revalidate: REVALIDATE_SECONDS, tags: ["privacy-policy"] },
+);
+
 export const getDocs = <T>(args: FindDocsArgs) =>
   unstable_cache(
-    () => findDocs<T>(args),
+    () => findDocs<T>(args).catch(() => [] as T[]),
     ["docs", JSON.stringify(args)],
     { revalidate: REVALIDATE_SECONDS, tags: [String(args.collection)] },
   )();
 
 export const getProjectBySlug = cache(async (slug: string) => {
-  const docs = await getDocs({
+  const docs = await getDocs<Project>({
     collection: "projects",
     where: { slug: { equals: slug } },
     limit: 1,
@@ -65,7 +77,7 @@ export const getProjectBySlug = cache(async (slug: string) => {
 });
 
 export const getServiceOfferingBySlug = cache(async (slug: string) => {
-  const docs = await getDocs({
+  const docs = await getDocs<ServiceOffering>({
     collection: "service-offerings",
     where: { slug: { equals: slug } },
     limit: 1,
@@ -75,7 +87,7 @@ export const getServiceOfferingBySlug = cache(async (slug: string) => {
 });
 
 export const getBlogPostBySlug = cache(async (slug: string) => {
-  const docs = await getDocs({
+  const docs = await getDocs<BlogPost>({
     collection: "blog-posts",
     where: { slug: { equals: slug }, draft: { equals: false } },
     limit: 1,

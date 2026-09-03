@@ -51,7 +51,7 @@ export function Projects({
                   className="relative block aspect-video w-full overflow-hidden"
                 >
                   <Image
-                    src={cover.url}
+                    src={cover.sizes?.card?.url || cover.url}
                     alt={cover.alt || project.title}
                     fill
                     sizes="(min-width: 640px) 50vw, 100vw"

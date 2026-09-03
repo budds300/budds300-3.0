@@ -9,6 +9,10 @@ const INTERVAL_LABEL: Record<Service["billingInterval"], string> = {
   hourly: "/hr",
 };
 
+const KES_FORMATTER = new Intl.NumberFormat("en-KE", {
+  maximumFractionDigits: 0,
+});
+
 export function Pricing({
   services,
   viewAllHref,
@@ -56,7 +60,7 @@ export function Pricing({
               <p className="mt-4">
                 <span className="text-sm text-muted">from </span>
                 <span className="text-3xl font-extrabold">
-                  ${service.price}
+                  KSh {KES_FORMATTER.format(service.price)}
                 </span>
                 <span className="text-base font-normal text-muted">
                   {" "}

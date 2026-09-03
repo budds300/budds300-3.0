@@ -2,19 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getPayloadClient } from "@/lib/payload";
-import type { Media } from "@/payload-types";
+import { getProjectBySlug, getDocs } from "@/lib/frontend-data";
+import type { Media, Project } from "@/payload-types";
 import { RichText } from "@/components/RichText";
 
-async function getProject(slug: string) {
-  const payload = await getPayloadClient();
-  const { docs } = await payload.find({
-    collection: "projects",
-    where: { slug: { equals: slug } },
-    limit: 1,
-  });
-  return docs[0] ?? null;
-}
+export const revalidate = 300;
 
 export async function generateMetadata({
   params,
@@ -22,7 +14,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const project = await getProject(slug);
+  const project = await getProjectBySlug(slug);
   if (!project) return {};
   return {
     title: project.title,
@@ -37,11 +29,10 @@ export default async function ProjectDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = await getProject(slug);
+  const project = await getProjectBySlug(slug);
   if (!project) notFound();
 
-  const payload = await getPayloadClient();
-  const { docs: others } = await payload.find({
+  const others = await getDocs<Project>({
     collection: "projects",
     where: { slug: { not_equals: slug } },
     limit: 1,
@@ -102,7 +93,7 @@ export default async function ProjectDetailPage({
       {cover?.url ? (
         <div className="relative mx-auto mt-10 aspect-video w-full max-w-5xl overflow-hidden rounded-2xl px-6">
           <Image
-            src={cover.url}
+            src={cover.sizes?.hero?.url || cover.url}
             alt={cover.alt || project.title}
             fill
             sizes="(min-width: 1024px) 64rem, 100vw"

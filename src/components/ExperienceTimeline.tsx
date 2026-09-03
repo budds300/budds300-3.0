@@ -20,10 +20,13 @@ export function ExperienceTimeline({
 
   return (
     <section id="experience" className="mx-auto max-w-5xl px-6 py-24">
-      <Reveal className="flex items-end justify-between gap-4">
-        <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-          Experience
-        </h2>
+      <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <span className="section-kicker">Career</span>
+          <h2 className="mt-4 text-3xl font-black tracking-tight sm:text-5xl">
+            Experience
+          </h2>
+        </div>
         {viewAllHref ? (
           <Link
             href={viewAllHref}

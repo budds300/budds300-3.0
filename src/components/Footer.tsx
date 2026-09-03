@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { GlobalSetting } from "@/payload-types";
 
 export function Footer({ settings }: { settings: GlobalSetting | null }) {
@@ -9,6 +10,9 @@ export function Footer({ settings }: { settings: GlobalSetting | null }) {
       <div className="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-10 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
         <p>&copy; {year} All rights reserved.</p>
         <div className="flex gap-4">
+          <Link href="/privacy-policy" className="hover:text-foreground">
+            Privacy Policy
+          </Link>
           {contact?.email ? (
             <a href={`mailto:${contact.email}`} className="hover:text-foreground">
               Email

@@ -1,22 +1,21 @@
 import type { Metadata } from "next";
-import { getPayloadClient } from "@/lib/payload";
+import { getDocs } from "@/lib/frontend-data";
 import { ServiceOfferings } from "@/components/ServiceOfferings";
 import { Pricing } from "@/components/Pricing";
 import { CtaBanner } from "@/components/CtaBanner";
+import type { ServiceOffering, Service } from "@/payload-types";
 
 export const metadata: Metadata = {
   title: "Services",
   alternates: { canonical: "/services" },
 };
 
-export default async function ServicesPage() {
-  const payload = await getPayloadClient();
+export const revalidate = 300;
 
+export default async function ServicesPage() {
   const [offerings, services] = await Promise.all([
-    payload
-      .find({ collection: "service-offerings", sort: "order", limit: 40 })
-      .then((res) => res.docs),
-    payload.find({ collection: "services", limit: 12 }).then((res) => res.docs),
+    getDocs<ServiceOffering>({ collection: "service-offerings", sort: "order", limit: 40 }),
+    getDocs<Service>({ collection: "services", limit: 12 }),
   ]);
 
   return (

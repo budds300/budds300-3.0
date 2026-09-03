@@ -34,19 +34,19 @@ export function Clients({ clients }: { clients: Client[] }) {
           <div className="marquee-track flex min-w-full shrink-0 items-center gap-4 pr-4">
             {repeatedClients.map((client, index) => (
               <a
-                key={`${client}-${index}`}
+                key={`${client.id}-${index}`}
                 href={client.website || undefined}
                 target={client.website ? "_blank" : undefined}
                 rel={client.website ? "noopener noreferrer" : undefined}
-                className="flex h-24 min-w-56 items-center justify-center rounded-lg border border-border bg-background px-8 text-center text-xl font-black uppercase tracking-wide text-foreground/82"
+                className="flex h-28 min-w-64 items-center justify-center rounded-lg border border-border bg-white px-6 text-center text-xl font-black uppercase tracking-wide text-neutral-900 shadow-sm transition-transform hover:scale-[1.03]"
               >
                 {client.logo && typeof client.logo === "object" && (client.logo as Media).url ? (
                   <Image
                     src={(client.logo as Media).url!}
                     alt={(client.logo as Media).alt || client.name}
-                    width={150}
-                    height={48}
-                    className="max-h-12 w-auto object-contain"
+                    width={220}
+                    height={88}
+                    className="max-h-20 w-auto max-w-full object-contain"
                   />
                 ) : (
                   client.name

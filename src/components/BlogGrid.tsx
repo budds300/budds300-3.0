@@ -27,10 +27,13 @@ export function BlogGrid({
   return (
     <section id="blog" className="mx-auto max-w-5xl px-6 py-24">
       {showHeading ? (
-        <Reveal className="flex items-end justify-between gap-4">
-          <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-            {heading}
-          </h2>
+        <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <span className="section-kicker">Blog</span>
+            <h2 className="mt-4 text-3xl font-black tracking-tight sm:text-5xl">
+              {heading}
+            </h2>
+          </div>
           {viewAllHref ? (
             <Link
               href={viewAllHref}
@@ -54,7 +57,7 @@ export function BlogGrid({
                 {cover?.url ? (
                   <div className="relative aspect-video w-full">
                     <Image
-                      src={cover.url}
+                      src={cover.sizes?.card?.url || cover.url}
                       alt={cover.alt || post.title}
                       fill
                       sizes="(min-width: 640px) 33vw, 100vw"

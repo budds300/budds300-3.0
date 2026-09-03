@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Media, TechStackItem } from "@/payload-types";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
+import { TECH_ICONS } from "@/lib/tech-icons";
 
 export function TechStackGrid({ items }: { items: TechStackItem[] }) {
   if (items.length === 0) return null;
@@ -8,7 +9,8 @@ export function TechStackGrid({ items }: { items: TechStackItem[] }) {
   return (
     <section id="stack" className="mx-auto max-w-5xl px-6 py-24">
       <Reveal className="card p-8 text-center sm:p-12">
-        <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
+        <span className="section-kicker">Stack</span>
+        <h2 className="mt-4 text-2xl font-extrabold tracking-tight sm:text-3xl">
           Our Tech Stack
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-muted">
@@ -24,6 +26,7 @@ export function TechStackGrid({ items }: { items: TechStackItem[] }) {
               item.icon && typeof item.icon === "object"
                 ? (item.icon as Media)
                 : null;
+            const logo = TECH_ICONS[item.name];
 
             return (
               <StaggerItem
@@ -39,6 +42,8 @@ export function TechStackGrid({ items }: { items: TechStackItem[] }) {
                       height={44}
                       className="h-full w-full object-cover"
                     />
+                  ) : logo ? (
+                    logo
                   ) : (
                     <span className="text-lg font-semibold">
                       {item.name.charAt(0)}

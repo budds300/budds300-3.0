@@ -1,19 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getPayloadClient } from "@/lib/payload";
+import { getServiceOfferingBySlug } from "@/lib/frontend-data";
 import { RichText } from "@/components/RichText";
 import { CtaBanner } from "@/components/CtaBanner";
 
-async function getOffering(slug: string) {
-  const payload = await getPayloadClient();
-  const { docs } = await payload.find({
-    collection: "service-offerings",
-    where: { slug: { equals: slug } },
-    limit: 1,
-  });
-  return docs[0] ?? null;
-}
+export const revalidate = 300;
 
 export async function generateMetadata({
   params,
@@ -21,7 +13,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const offering = await getOffering(slug);
+  const offering = await getServiceOfferingBySlug(slug);
   if (!offering) return {};
   return {
     title: offering.title,
@@ -36,7 +28,7 @@ export default async function ServiceDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const offering = await getOffering(slug);
+  const offering = await getServiceOfferingBySlug(slug);
   if (!offering) notFound();
 
   return (

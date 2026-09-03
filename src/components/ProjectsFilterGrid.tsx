@@ -64,7 +64,7 @@ export function ProjectsFilterGrid({ projects }: { projects: Project[] }) {
               {cover?.url ? (
                 <Link href={`/projects/${project.slug}`} className="relative block aspect-video w-full">
                   <Image
-                    src={cover.url}
+                    src={cover.sizes?.card?.url || cover.url}
                     alt={cover.alt || project.title}
                     fill
                     sizes="(min-width: 640px) 50vw, 100vw"
