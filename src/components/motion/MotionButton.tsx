@@ -19,3 +19,21 @@ export function MotionAnchor({
     </motion.a>
   );
 }
+
+export function MotionButton({
+  className,
+  children,
+  ...props
+}: HTMLMotionProps<"button">) {
+  return (
+    <motion.button
+      className={className}
+      whileHover={{ y: -2, scale: 1.02 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
+      {...props}
+    >
+      {children}
+    </motion.button>
+  );
+}

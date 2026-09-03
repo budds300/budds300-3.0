@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState } from "react";
 import type { Media, Testimonial } from "@/payload-types";
 import { StarRating } from "@/components/StarRating";
 
@@ -22,85 +23,124 @@ export function TestimonialsCarousel({
 }: {
   testimonials: Testimonial[];
 }) {
-  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const active = testimonials[activeIndex];
+  const avatar =
+    active?.avatar && typeof active.avatar === "object"
+      ? (active.avatar as Media)
+      : null;
 
-  const scrollByCard = (direction: "left" | "right") => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const card = el.querySelector<HTMLElement>("[data-card]");
-    const amount = (card?.offsetWidth ?? 320) + 24;
-    el.scrollBy({
-      left: direction === "left" ? -amount : amount,
-      behavior: "smooth",
-    });
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveIndex((index) => (index + 1) % testimonials.length);
+    }, 5500);
+
+    return () => window.clearInterval(timer);
+  }, [testimonials.length]);
+
+  const move = (direction: "left" | "right") => {
+    setActiveIndex((index) =>
+      direction === "left"
+        ? (index - 1 + testimonials.length) % testimonials.length
+        : (index + 1) % testimonials.length,
+    );
   };
 
-  return (
-    <div>
-      <div
-        ref={scrollerRef}
-        className="no-scrollbar mx-auto mt-10 flex max-w-5xl snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4"
-        style={{
-          maskImage:
-            "linear-gradient(to right, transparent, black 24px, black calc(100% - 24px), transparent)",
-        }}
-      >
-        {testimonials.map((t) => {
-          const avatar =
-            t.avatar && typeof t.avatar === "object"
-              ? (t.avatar as Media)
-              : null;
+  if (!active) return null;
 
-          return (
-            <figure
-              key={t.id}
-              data-card
-              className="card w-[80vw] shrink-0 snap-start p-6 sm:w-80"
+  return (
+    <div className="mx-auto mt-10 max-w-5xl px-6">
+      <div className="grid gap-6 lg:grid-cols-[1fr_0.55fr]">
+        <div className="card relative min-h-[23rem] overflow-hidden p-6 sm:p-8">
+          <div className="absolute right-6 top-4 text-8xl font-black text-foreground/[0.04]">
+            0{activeIndex + 1}
+          </div>
+          <AnimatePresence mode="wait">
+            <motion.figure
+              key={active.id}
+              initial={{ opacity: 0, x: 48, filter: "blur(8px)" }}
+              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, x: -48, filter: "blur(8px)" }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              className="relative flex h-full flex-col"
             >
-              <div className="flex items-center gap-3">
+              <StarRating rating={active.rating} className="text-lg" />
+              <blockquote className="mt-8 text-2xl font-semibold leading-snug sm:text-3xl">
+                &ldquo;{active.quote}&rdquo;
+              </blockquote>
+              <div className="mt-auto flex items-center gap-4 pt-10">
                 {avatar?.url ? (
                   <Image
                     src={avatar.url}
-                    alt={avatar.alt || t.clientName}
-                    width={40}
-                    height={40}
-                    className="rounded-full object-cover"
+                    alt={avatar.alt || active.clientName}
+                    width={56}
+                    height={56}
+                    className="h-14 w-14 rounded-full object-cover"
                   />
-                ) : null}
+                ) : (
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-accent font-black text-accent-foreground">
+                    {active.clientName.slice(0, 1)}
+                  </div>
+                )}
                 <div>
-                  <p className="font-medium">{t.clientName}</p>
-                  <p className="text-sm text-muted">{t.roleCompany}</p>
+                  <p className="font-bold">{active.clientName}</p>
+                  <p className="text-sm text-muted">{active.roleCompany}</p>
                 </div>
               </div>
-              <StarRating rating={t.rating} className="mt-4" />
-              <blockquote className="mt-3 text-muted">
-                &ldquo;{t.quote}&rdquo;
-              </blockquote>
-              <p className="mt-4 border-t border-border pt-3 text-sm text-muted">
-                Reviews on: <span className="text-foreground">{t.platform}</span>
+              <p className="mt-5 border-t border-border pt-4 text-sm text-muted">
+                Reviews on: <span className="text-foreground">{active.platform}</span>
               </p>
-            </figure>
-          );
-        })}
-      </div>
+            </motion.figure>
+          </AnimatePresence>
+        </div>
 
-      <div className="mx-auto mt-4 flex max-w-5xl items-center gap-3 px-6">
-        <button
-          type="button"
-          onClick={() => scrollByCard("left")}
-          aria-label="Previous testimonial"
-          className="icon-badge text-accent-foreground transition-opacity hover:opacity-80"
-        >
-          <ChevronIcon direction="left" />
-        </button>
-        <button
-          type="button"
-          onClick={() => scrollByCard("right")}
-          aria-label="Next testimonial"
-          className="icon-badge text-accent-foreground transition-opacity hover:opacity-80"
-        >
-          <ChevronIcon direction="right" />
-        </button>
+        <div className="flex flex-col justify-between gap-4">
+          <div className="grid gap-3">
+            {testimonials.map((testimonial, index) => (
+              <button
+                key={testimonial.id}
+                type="button"
+                onClick={() => setActiveIndex(index)}
+                className={`rounded-lg border p-4 text-left transition-all ${
+                  index === activeIndex
+                    ? "border-accent bg-accent text-accent-foreground"
+                    : "border-border bg-background-elevated text-muted hover:border-accent/60 hover:text-foreground"
+                }`}
+              >
+                <span className="text-xs font-black uppercase">0{index + 1}</span>
+                <p className="mt-1 font-bold">{testimonial.clientName}</p>
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => move("left")}
+              aria-label="Previous testimonial"
+              className="icon-badge text-accent-foreground transition-opacity hover:opacity-80"
+            >
+              <ChevronIcon direction="left" />
+            </button>
+            <button
+              type="button"
+              onClick={() => move("right")}
+              aria-label="Next testimonial"
+              className="icon-badge text-accent-foreground transition-opacity hover:opacity-80"
+            >
+              <ChevronIcon direction="right" />
+            </button>
+            <div className="ml-2 h-px flex-1 bg-border">
+              <motion.div
+                key={activeIndex}
+                className="h-px bg-accent"
+                initial={{ width: "0%" }}
+                animate={{ width: "100%" }}
+                transition={{ duration: 5.5, ease: "linear" }}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

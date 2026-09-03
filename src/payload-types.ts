@@ -74,6 +74,9 @@ export interface Config {
     'service-offerings': ServiceOffering;
     'work-experience': WorkExperience;
     testimonials: Testimonial;
+    clients: Client;
+    'tech-stack-items': TechStackItem;
+    'blog-posts': BlogPost;
     messages: Message;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -89,6 +92,9 @@ export interface Config {
     'service-offerings': ServiceOfferingsSelect<false> | ServiceOfferingsSelect<true>;
     'work-experience': WorkExperienceSelect<false> | WorkExperienceSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    clients: ClientsSelect<false> | ClientsSelect<true>;
+    'tech-stack-items': TechStackItemsSelect<false> | TechStackItemsSelect<true>;
+    'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
     messages: MessagesSelect<false> | MessagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -101,9 +107,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     'global-settings': GlobalSetting;
+    'privacy-policy': PrivacyPolicy;
   };
   globalsSelect: {
     'global-settings': GlobalSettingsSelect<false> | GlobalSettingsSelect<true>;
+    'privacy-policy': PrivacyPolicySelect<false> | PrivacyPolicySelect<true>;
   };
   locale: null;
   widgets: {
@@ -176,6 +184,32 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    hero?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -184,7 +218,29 @@ export interface Media {
 export interface Project {
   id: number;
   title: string;
+  /**
+   * Used in the /projects/[slug] URL.
+   */
+  slug: string;
   description: string;
+  /**
+   * Optional problem/solution narrative shown on the /projects/[slug] case-study page.
+   */
+  caseStudy?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   techStack?:
     | {
         tag: string;
@@ -224,7 +280,29 @@ export interface Service {
 export interface ServiceOffering {
   id: number;
   title: string;
+  /**
+   * Optional. Set this to give the offering its own /services/[slug] detail page.
+   */
+  slug?: string | null;
   description: string;
+  /**
+   * Optional expanded body for the /services/[slug] page.
+   */
+  detail?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   icon: 'web' | 'automation' | 'design' | 'ecommerce' | 'cms' | 'devops';
   /**
    * Lower numbers appear first.
@@ -267,6 +345,84 @@ export interface Testimonial {
   quote: string;
   rating: number;
   platform: 'Upwork' | 'LinkedIn' | 'Google' | 'Direct';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clients".
+ */
+export interface Client {
+  id: number;
+  name: string;
+  /**
+   * Optional. If empty, the client name is shown instead.
+   */
+  logo?: (number | null) | Media;
+  /**
+   * Optional URL used when the client item is clicked.
+   */
+  website?: string | null;
+  /**
+   * Lower numbers appear first.
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tech-stack-items".
+ */
+export interface TechStackItem {
+  id: number;
+  name: string;
+  /**
+   * Optional. Upload the tool's logo (square works best). Falls back to the tool's initial if left blank.
+   */
+  icon?: (number | null) | Media;
+  /**
+   * Lower numbers appear first.
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-posts".
+ */
+export interface BlogPost {
+  id: number;
+  title: string;
+  /**
+   * Used in the /blog/[slug] URL.
+   */
+  slug: string;
+  coverImage: number | Media;
+  category: string;
+  excerpt: string;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  author: string;
+  publishedDate: string;
+  /**
+   * Draft posts are excluded from /blog and /blog/[slug].
+   */
+  draft?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -334,6 +490,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'testimonials';
         value: number | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'clients';
+        value: number | Client;
+      } | null)
+    | ({
+        relationTo: 'tech-stack-items';
+        value: number | TechStackItem;
+      } | null)
+    | ({
+        relationTo: 'blog-posts';
+        value: number | BlogPost;
       } | null)
     | ({
         relationTo: 'messages';
@@ -420,6 +588,40 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        hero?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -427,7 +629,9 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface ProjectsSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   description?: T;
+  caseStudy?: T;
   techStack?:
     | T
     | {
@@ -465,7 +669,9 @@ export interface ServicesSelect<T extends boolean = true> {
  */
 export interface ServiceOfferingsSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   description?: T;
+  detail?: T;
   icon?: T;
   order?: T;
   updatedAt?: T;
@@ -505,6 +711,46 @@ export interface TestimonialsSelect<T extends boolean = true> {
   quote?: T;
   rating?: T;
   platform?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clients_select".
+ */
+export interface ClientsSelect<T extends boolean = true> {
+  name?: T;
+  logo?: T;
+  website?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tech-stack-items_select".
+ */
+export interface TechStackItemsSelect<T extends boolean = true> {
+  name?: T;
+  icon?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-posts_select".
+ */
+export interface BlogPostsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  coverImage?: T;
+  category?: T;
+  excerpt?: T;
+  body?: T;
+  author?: T;
+  publishedDate?: T;
+  draft?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -569,6 +815,14 @@ export interface GlobalSetting {
   headline: string;
   bio: string;
   /**
+   * Logo shown in the header navigation. Falls back to the initials badge if left blank.
+   */
+  logo?: (number | null) | Media;
+  /**
+   * Browser tab icon. Square image recommended (e.g. 512x512 PNG).
+   */
+  favicon?: (number | null) | Media;
+  /**
    * Portrait shown in the hero section.
    */
   profileImage?: (number | null) | Media;
@@ -580,9 +834,46 @@ export interface GlobalSetting {
   contactDetails?: {
     email?: string | null;
     phone?: string | null;
+    /**
+     * Number used for the "Chat on WhatsApp" button, in international format (e.g. +254701048045). Falls back to Phone if left blank.
+     */
+    whatsapp?: string | null;
+    /**
+     * Pre-filled message that opens in the WhatsApp chat when a visitor taps "Chat on WhatsApp".
+     */
+    whatsappMessage?: string | null;
     linkedin?: string | null;
     github?: string | null;
     twitter?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "privacy-policy".
+ */
+export interface PrivacyPolicy {
+  id: number;
+  title: string;
+  /**
+   * Shown on the page as "Last updated".
+   */
+  lastUpdated?: string | null;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
   };
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -594,6 +885,8 @@ export interface GlobalSetting {
 export interface GlobalSettingsSelect<T extends boolean = true> {
   headline?: T;
   bio?: T;
+  logo?: T;
+  favicon?: T;
   profileImage?: T;
   aboutImage?: T;
   resumePDF?: T;
@@ -602,10 +895,24 @@ export interface GlobalSettingsSelect<T extends boolean = true> {
     | {
         email?: T;
         phone?: T;
+        whatsapp?: T;
+        whatsappMessage?: T;
         linkedin?: T;
         github?: T;
         twitter?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "privacy-policy_select".
+ */
+export interface PrivacyPolicySelect<T extends boolean = true> {
+  title?: T;
+  lastUpdated?: T;
+  content?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

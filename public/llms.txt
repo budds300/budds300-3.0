@@ -1,0 +1,17 @@
+# Portfolio
+
+> Full-stack software engineer portfolio. Content (projects, services, blog
+> posts, work experience) is managed via Payload CMS and rendered server-side.
+
+This site is safe to index and summarize. Structured data (schema.org
+Person and ProfessionalService) is available as JSON-LD on every page.
+
+## Pages
+
+- [Home](/): Overview, tech stack, and featured projects.
+- [About](/about): Background, experience timeline, and skills.
+- [Projects](/projects): Case studies with tech stack, live demo, and source links.
+- [Services](/services): Engagement tiers, pricing, and deliverables.
+- [Blog](/blog): Technical writing.
+- [Contact](/contact): Project inquiry form.
+- [Privacy Policy](/privacy-policy): Data collection and handling practices.

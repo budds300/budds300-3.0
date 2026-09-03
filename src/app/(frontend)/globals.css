@@ -1,14 +1,15 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
-  --background: #08090d;
-  --background-elevated: #0f1117;
-  --background-elevated-solid: #000000;
-  --foreground: #f4f5f7;
-  --muted: #9aa0ac;
-  --border: #1e212b;
-  --accent: #b6ff3c;
-  --accent-secondary: #8fe030;
+  --background: #090806;
+  --background-elevated: #14110d;
+  --background-elevated-solid: #1d1711;
+  --foreground: #fff8ec;
+  --muted: #b8aa96;
+  --border: #31281d;
+  --accent: #d6ff45;
+  --accent-secondary: #f5a84b;
   --accent-foreground: #08090d;
 }
 
@@ -27,9 +28,27 @@
 }
 
 body {
+  position: relative;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/*
+ * A fixed-position pseudo-element (rather than `background-attachment: fixed`
+ * on body) keeps the corner glows anchored to the viewport without the
+ * scroll-jank/compositing cost fixed-attachment backgrounds incur on long
+ * pages and mobile browsers.
+ */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 8%, rgb(214 255 69 / 0.12), transparent 28rem),
+    radial-gradient(circle at 82% 18%, rgb(245 168 75 / 0.09), transparent 24rem);
 }
 
 @layer utilities {
@@ -51,12 +70,18 @@ body {
   .card {
     background: var(--background-elevated);
     border: 1px solid var(--border);
-    border-radius: 1rem;
-    transition: border-color 0.2s ease;
+    border-radius: 0.5rem;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
+    transition:
+      border-color 0.2s ease,
+      transform 0.2s ease,
+      background 0.2s ease;
   }
 
   .card:hover {
     border-color: color-mix(in srgb, var(--accent) 50%, var(--border));
+    background: color-mix(in srgb, var(--background-elevated) 88%, var(--accent) 12%);
+    transform: translateY(-4px);
   }
 
   .icon-tile {
@@ -121,5 +146,46 @@ body {
 
   .btn-glow {
     transition: transform 0.2s ease;
+  }
+
+  .section-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border));
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--background-elevated) 72%, transparent);
+    padding: 0.45rem 0.8rem;
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .section-kicker::before {
+    content: "";
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 9999px;
+    background: var(--accent);
+    box-shadow: 0 0 18px var(--accent);
+  }
+
+  .marquee-track {
+    animation: marquee 24s linear infinite;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
   }
 }

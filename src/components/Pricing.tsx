@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Service } from "@/payload-types";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 import { MotionAnchor } from "@/components/motion/MotionButton";
@@ -8,17 +9,40 @@ const INTERVAL_LABEL: Record<Service["billingInterval"], string> = {
   hourly: "/hr",
 };
 
-export function Pricing({ services }: { services: Service[] }) {
+const KES_FORMATTER = new Intl.NumberFormat("en-KE", {
+  maximumFractionDigits: 0,
+});
+
+export function Pricing({
+  services,
+  viewAllHref,
+  compact = false,
+}: {
+  services: Service[];
+  viewAllHref?: string;
+  compact?: boolean;
+}) {
   if (services.length === 0) return null;
 
   const highlightIndex = services.length === 3 ? 1 : -1;
 
   return (
     <section id="pricing" className="mx-auto max-w-5xl px-6 py-24">
-      <Reveal>
-        <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-          Services & Pricing
-        </h2>
+      <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <span className="section-kicker">Pricing</span>
+          <h2 className="mt-4 text-3xl font-black tracking-tight sm:text-5xl">
+            Services & Pricing
+          </h2>
+        </div>
+        {viewAllHref ? (
+          <Link
+            href={viewAllHref}
+            className="shrink-0 text-sm font-medium text-accent hover:underline"
+          >
+            View All &rarr;
+          </Link>
+        ) : null}
       </Reveal>
       <StaggerGroup className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
         {services.map((service, i) => {
@@ -36,20 +60,22 @@ export function Pricing({ services }: { services: Service[] }) {
               <p className="mt-4">
                 <span className="text-sm text-muted">from </span>
                 <span className="text-3xl font-extrabold">
-                  ${service.price}
+                  KSh {KES_FORMATTER.format(service.price)}
                 </span>
                 <span className="text-base font-normal text-muted">
                   {" "}
                   {INTERVAL_LABEL[service.billingInterval]}
                 </span>
               </p>
-              {service.features?.length ? (
+              {!compact && service.features?.length ? (
                 <ul className="mt-6 flex-1 space-y-2 text-sm text-muted">
                   {service.features.map((f) => (
                     <li key={f.id ?? f.feature}>{f.feature}</li>
                   ))}
                 </ul>
-              ) : null}
+              ) : (
+                <div className="flex-1" />
+              )}
               <MotionAnchor
                 href={service.ctaLink}
                 className="btn-glow mt-6 rounded-full bg-accent px-5 py-2.5 text-center font-medium text-accent-foreground"

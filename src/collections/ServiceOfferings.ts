@@ -1,3 +1,4 @@
+import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import type { CollectionConfig } from "payload";
 
 export const ServiceOfferings: CollectionConfig = {
@@ -17,9 +18,26 @@ export const ServiceOfferings: CollectionConfig = {
       required: true,
     },
     {
+      name: "slug",
+      type: "text",
+      unique: true,
+      admin: {
+        description:
+          "Optional. Set this to give the offering its own /services/[slug] detail page.",
+      },
+    },
+    {
       name: "description",
       type: "textarea",
       required: true,
+    },
+    {
+      name: "detail",
+      type: "richText",
+      editor: lexicalEditor(),
+      admin: {
+        description: "Optional expanded body for the /services/[slug] page.",
+      },
     },
     {
       name: "icon",

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { WorkExperience } from "@/payload-types";
 import { Reveal } from "@/components/motion/Reveal";
 
@@ -10,17 +11,30 @@ function formatDate(iso: string) {
 
 export function ExperienceTimeline({
   experience,
+  viewAllHref,
 }: {
   experience: WorkExperience[];
+  viewAllHref?: string;
 }) {
   if (experience.length === 0) return null;
 
   return (
     <section id="experience" className="mx-auto max-w-5xl px-6 py-24">
-      <Reveal>
-        <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-          Experience
-        </h2>
+      <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <span className="section-kicker">Career</span>
+          <h2 className="mt-4 text-3xl font-black tracking-tight sm:text-5xl">
+            Experience
+          </h2>
+        </div>
+        {viewAllHref ? (
+          <Link
+            href={viewAllHref}
+            className="shrink-0 text-sm font-medium text-accent hover:underline"
+          >
+            View All &rarr;
+          </Link>
+        ) : null}
       </Reveal>
       <ol className="mt-10 space-y-10 border-l border-border pl-8">
         {experience.map((role) => (

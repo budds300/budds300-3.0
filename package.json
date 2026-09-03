@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --webpack",
+    "dev:turbo": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -25,16 +26,19 @@
     "payload": "3.88.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "resend": "^6.25.0",
     "sharp": "0.35.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@tailwindcss/typography": "^0.5.20",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.0",
     "tailwindcss": "^4",
+    "tsx": "^4.23.12",
     "typescript": "^5"
   },
   "packageManager": "pnpm@10.32.1",
