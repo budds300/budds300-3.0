@@ -7,15 +7,41 @@ export const GlobalSettings: GlobalConfig = {
   },
   fields: [
     {
+      name: "metaTitle",
+      label: "Metadata Title (SEO & Browser Tab)",
+      type: "text",
+      admin: {
+        description:
+          "Title used for the browser tab, search engine results, and social share previews. Falls back to Hero Headline if left blank.",
+      },
+    },
+    {
+      name: "metaDescription",
+      label: "Metadata Description (SEO)",
+      type: "textarea",
+      admin: {
+        description:
+          "Description used for search engine results and social share previews. Falls back to Hero Bio if left blank.",
+      },
+    },
+    {
       name: "headline",
+      label: "Hero Headline",
       type: "text",
       required: true,
       defaultValue: "Full-Stack / Software Engineer",
+      admin: {
+        description: "Primary headline displayed in the hero section on the homepage.",
+      },
     },
     {
       name: "bio",
+      label: "Hero Bio",
       type: "textarea",
       required: true,
+      admin: {
+        description: "Introductory bio displayed in the hero section.",
+      },
     },
     {
       name: "logo",
@@ -63,6 +89,14 @@ export const GlobalSettings: GlobalConfig = {
         {
           name: "email",
           type: "email",
+        },
+        {
+          name: "secondaryEmail",
+          type: "email",
+          admin: {
+            description:
+              "Optional second contact email (e.g. info@...), shown alongside the primary email.",
+          },
         },
         {
           name: "phone",

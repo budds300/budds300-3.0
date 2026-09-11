@@ -21,6 +21,7 @@ export default async function ServicesPage() {
   return (
     <>
       <div className="pt-16" />
+      <h1 className="sr-only">Services</h1>
       <ServiceOfferings offerings={offerings} expanded />
       <Pricing services={services} />
       <CtaBanner

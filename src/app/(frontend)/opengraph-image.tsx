@@ -6,9 +6,14 @@ export const contentType = "image/png";
 
 export default async function Image() {
   const settings = await getGlobalSettings();
-  const title = settings?.headline || "Full-Stack / Software Engineer";
+  const title =
+    settings?.metaTitle?.trim() ||
+    settings?.headline ||
+    "Full-Stack / Software Engineer";
   const bio =
-    settings?.bio || "Building fast, reliable web products.";
+    settings?.metaDescription?.trim() ||
+    settings?.bio ||
+    "Building fast, reliable web products.";
 
   return new ImageResponse(
     (

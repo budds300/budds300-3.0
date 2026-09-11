@@ -85,6 +85,7 @@ export default async function ContactPage() {
 
   return (
     <div className="pt-16">
+      <h1 className="sr-only">Contact</h1>
       <ContactForm />
       {hasDirectContact || socials.length > 0 ? (
         <section className="mx-auto max-w-2xl px-6 pb-24">
@@ -94,6 +95,7 @@ export default async function ContactPage() {
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Chat on WhatsApp. Usually replies within minutes."
                 className="card group relative flex items-center gap-4 overflow-hidden p-6 ring-1 ring-accent/25"
               >
                 <div
@@ -128,7 +130,7 @@ export default async function ContactPage() {
             </Reveal>
           ) : null}
 
-          {contact?.email || contact?.phone ? (
+          {contact?.email || contact?.secondaryEmail || contact?.phone ? (
             <StaggerGroup
               className={`grid gap-4 sm:grid-cols-2 ${whatsappHref ? "mt-4" : ""}`}
             >
@@ -136,6 +138,7 @@ export default async function ContactPage() {
                 <StaggerItem>
                   <a
                     href={`mailto:${contact.email}`}
+                    aria-label={`Email ${contact.email}`}
                     className="card flex items-center gap-3 p-5 hover:text-accent"
                   >
                     <span className="icon-tile shrink-0">
@@ -152,10 +155,32 @@ export default async function ContactPage() {
                   </a>
                 </StaggerItem>
               ) : null}
+              {contact.secondaryEmail ? (
+                <StaggerItem>
+                  <a
+                    href={`mailto:${contact.secondaryEmail}`}
+                    aria-label={`Email ${contact.secondaryEmail}`}
+                    className="card flex items-center gap-3 p-5 hover:text-accent"
+                  >
+                    <span className="icon-tile shrink-0">
+                      <MailIcon />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-xs uppercase tracking-wide text-muted">
+                        Email
+                      </span>
+                      <span className="block truncate text-sm font-medium text-foreground">
+                        {contact.secondaryEmail}
+                      </span>
+                    </span>
+                  </a>
+                </StaggerItem>
+              ) : null}
               {contact.phone ? (
                 <StaggerItem>
                   <a
                     href={`tel:${contact.phone}`}
+                    aria-label={`Phone ${contact.phone}`}
                     className="card flex items-center gap-3 p-5 hover:text-accent"
                   >
                     <span className="icon-tile shrink-0">

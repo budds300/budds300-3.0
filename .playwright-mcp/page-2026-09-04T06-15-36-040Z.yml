@@ -1,0 +1,84 @@
+- generic [ref=f3e1]:
+  - banner [ref=f3e2]:
+    - navigation [ref=f3e3]:
+      - link [ref=f3e4] [cursor=pointer]:
+        - /url: /
+        - img "logo" [ref=f3e5]
+      - button "Close menu" [expanded] [active] [ref=f3e112]
+    - list [ref=f3e114]:
+      - listitem [ref=f3e115]:
+        - link "Home" [ref=f3e116] [cursor=pointer]:
+          - /url: /#home
+      - listitem [ref=f3e117]:
+        - link "Services" [ref=f3e118] [cursor=pointer]:
+          - /url: /#services
+      - listitem [ref=f3e119]:
+        - link "Work" [ref=f3e120] [cursor=pointer]:
+          - /url: /#projects
+      - listitem [ref=f3e121]:
+        - link "Clients" [ref=f3e122] [cursor=pointer]:
+          - /url: /#clients
+      - listitem [ref=f3e123]:
+        - link "Reviews" [ref=f3e124] [cursor=pointer]:
+          - /url: /#testimonials
+      - listitem [ref=f3e125]:
+        - link "Contact" [ref=f3e126] [cursor=pointer]:
+          - /url: /contact
+      - listitem [ref=f3e127]:
+        - link "Let's Talk" [ref=f3e128] [cursor=pointer]:
+          - /url: /contact
+  - main [ref=f3e21]:
+    - generic [ref=f3e22]:
+      - generic [ref=f3e24]:
+        - generic [ref=f3e25]:
+          - generic [ref=f3e26]: Available for new projects
+          - heading "Senior Full-Stack Software Engineer & Data Analyst" [level=1] [ref=f3e29]
+          - paragraph [ref=f3e31]: Senior Full-Stack Software Engineer with 6+ years of experience building scalable enterprise platforms, e-commerce systems, and digital products across Africa. Specialising in modern full-stack development, system architecture, automation, and secure integrations.
+          - generic [ref=f3e32]:
+            - link "Chat on WhatsApp" [ref=f3e33] [cursor=pointer]:
+              - /url: https://wa.me/2540114271713?text=Hi%20Tamminga%2C%20I'd%20like%20to%20talk%20about%20a%20project.
+            - link "See Work" [ref=f3e36] [cursor=pointer]:
+              - /url: "#projects"
+        - generic [ref=f3e37]:
+          - generic [ref=f3e38]: 5+ Years
+          - img "Verification test" [ref=f3e41]
+      - generic [ref=f3e44]:
+        - generic [ref=f3e46]:
+          - img "about" [ref=f3e51]
+          - generic [ref=f3e55]:
+            - generic [ref=f3e56]: Why Chose Us
+            - heading "Built for clarity, shipped for speed" [level=2] [ref=f3e57]
+            - paragraph [ref=f3e58]: I partner directly with founders and teams to turn ideas into reliable software — clear communication, sensible architecture, and code that's easy to hand off.
+            - link "Read More" [ref=f3e59] [cursor=pointer]:
+              - /url: /contact
+        - generic [ref=f3e63]:
+          - generic [ref=f3e64]:
+            - generic [ref=f3e65]: 0+
+            - paragraph [ref=f3e67]: Years ofExperience
+          - 'link "For any Help: hello@tammingabudds.com" [ref=f3e69] [cursor=pointer]':
+            - /url: mailto:hello@tammingabudds.com
+            - generic [ref=f3e74]:
+              - generic [ref=f3e75]: "For any Help:"
+              - generic [ref=f3e76]: hello@tammingabudds.com
+      - generic [ref=f3e81]:
+        - heading "Have a project in mind? Let's build it." [level=2] [ref=f3e82]
+        - list [ref=f3e83]:
+          - listitem [ref=f3e84]: Fast turnarounds
+          - listitem [ref=f3e85]: Clear communication
+        - link "Start a Conversation" [ref=f3e86] [cursor=pointer]:
+          - /url: /contact
+  - contentinfo [ref=f3e89]:
+    - generic [ref=f3e90]:
+      - paragraph [ref=f3e91]: © 2026 All rights reserved.
+      - generic [ref=f3e92]:
+        - link "Privacy Policy" [ref=f3e93] [cursor=pointer]:
+          - /url: /privacy-policy
+        - link "Email hello@tammingabudds.com" [ref=f3e94] [cursor=pointer]:
+          - /url: mailto:hello@tammingabudds.com
+          - text: Email
+        - link "GitHub" [ref=f3e95] [cursor=pointer]:
+          - /url: https://github.com/budds300/budds300
+        - link "LinkedIn" [ref=f3e96] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/tamminga-budds/
+  - button "Open Next.js Dev Tools" [ref=f3e102] [cursor=pointer]
+  - alert [ref=f3e106]

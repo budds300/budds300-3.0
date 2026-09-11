@@ -24,8 +24,12 @@ const SITE_URL =
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getGlobalSettings();
 
-  const title = settings?.headline || "Full-Stack / Software Engineer";
+  const title =
+    settings?.metaTitle?.trim() ||
+    settings?.headline ||
+    "Full-Stack / Software Engineer";
   const description =
+    settings?.metaDescription?.trim() ||
     settings?.bio ||
     "Full-stack software engineer building fast, reliable web products.";
   const favicon =
