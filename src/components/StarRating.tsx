@@ -8,6 +8,7 @@ function StarIcon({ filled }: { filled: boolean }) {
       stroke="currentColor"
       strokeWidth="1.5"
       className={filled ? "text-accent" : "text-border"}
+      aria-hidden="true"
     >
       <path
         d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"
@@ -27,6 +28,7 @@ export function StarRating({
   return (
     <div
       className={`flex items-center gap-1 ${className ?? ""}`}
+      role="img"
       aria-label={`${rating} out of 5 stars`}
     >
       {Array.from({ length: 5 }, (_, i) => (

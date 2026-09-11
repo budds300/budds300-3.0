@@ -1,0 +1,101 @@
+- generic [active] [ref=f4e1]:
+  - banner [ref=f4e2]:
+    - navigation [ref=f4e3]:
+      - link [ref=f4e4] [cursor=pointer]:
+        - /url: /
+        - img "logo" [ref=f4e5]
+      - button "Open menu" [ref=f4e7]
+    - generic:
+      - list:
+        - listitem:
+          - link:
+            - /url: /#home
+            - text: Home
+        - listitem:
+          - link:
+            - /url: /#services
+            - text: Services
+        - listitem:
+          - link:
+            - /url: /#projects
+            - text: Work
+        - listitem:
+          - link:
+            - /url: /#clients
+            - text: Clients
+        - listitem:
+          - link:
+            - /url: /#testimonials
+            - text: Reviews
+        - listitem:
+          - link:
+            - /url: /contact
+            - text: Contact
+        - listitem:
+          - link:
+            - /url: /contact
+            - text: Let's Talk
+  - main [ref=f4e12]:
+    - generic [ref=f4e14]:
+      - heading "Contact" [level=1] [ref=f4e15]
+      - generic [ref=f4e16]:
+        - generic [ref=f4e17]:
+          - generic [ref=f4e18]: Get In Touch
+          - heading "Let's Talk" [level=2] [ref=f4e19]
+          - paragraph [ref=f4e20]: Tell me about your project and I'll get back to you within a day.
+        - generic [ref=f4e22]:
+          - generic [ref=f4e23]:
+            - generic [ref=f4e24]:
+              - text: Name
+              - textbox "Name" [ref=f4e25]
+            - generic [ref=f4e26]:
+              - text: Email
+              - textbox "Email" [ref=f4e27]
+          - generic [ref=f4e28]:
+            - text: Budget
+            - textbox "Budget" [ref=f4e29]
+          - generic [ref=f4e30]:
+            - text: Message
+            - textbox "Message" [ref=f4e31]
+          - button "Send Message" [ref=f4e32]
+          - paragraph [ref=f4e35]:
+            - text: By submitting, you agree to have your details stored to respond to your inquiry. See the
+            - link "privacy policy" [ref=f4e36] [cursor=pointer]:
+              - /url: /privacy-policy
+            - text: .
+      - generic [ref=f4e37]:
+        - link "Chat on WhatsApp. Usually replies within minutes." [ref=f4e39] [cursor=pointer]:
+          - /url: https://wa.me/2540114271713?text=Hi%20Tamminga%2C%20I'd%20like%20to%20talk%20about%20a%20project.
+          - generic [ref=f4e43]:
+            - generic [ref=f4e44]: Chat on WhatsApp
+            - generic [ref=f4e45]: Usually replies within minutes
+        - generic [ref=f4e48]:
+          - link "Email hello@tammingabudds.com" [ref=f4e50] [cursor=pointer]:
+            - /url: mailto:hello@tammingabudds.com
+            - generic [ref=f4e55]:
+              - generic [ref=f4e56]: Email
+              - generic [ref=f4e57]: hello@tammingabudds.com
+          - link "Phone 07010480456" [ref=f4e59] [cursor=pointer]:
+            - /url: tel:07010480456
+            - generic [ref=f4e63]:
+              - generic [ref=f4e64]: Phone
+              - generic [ref=f4e65]: "07010480456"
+        - generic [ref=f4e66]:
+          - link "LinkedIn" [ref=f4e67] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/tamminga-budds/
+          - link "GitHub" [ref=f4e70] [cursor=pointer]:
+            - /url: https://github.com/budds300/budds300
+  - contentinfo [ref=f4e73]:
+    - generic [ref=f4e74]:
+      - paragraph [ref=f4e75]: © 2026 All rights reserved.
+      - generic [ref=f4e76]:
+        - link "Privacy Policy" [ref=f4e77] [cursor=pointer]:
+          - /url: /privacy-policy
+        - link "Email hello@tammingabudds.com" [ref=f4e78] [cursor=pointer]:
+          - /url: mailto:hello@tammingabudds.com
+          - text: Email
+        - link "GitHub" [ref=f4e79] [cursor=pointer]:
+          - /url: https://github.com/budds300/budds300
+        - link "LinkedIn" [ref=f4e80] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/tamminga-budds/
+  - button "Open Next.js Dev Tools" [ref=f4e86] [cursor=pointer]

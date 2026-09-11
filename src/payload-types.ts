@@ -812,7 +812,21 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface GlobalSetting {
   id: number;
+  /**
+   * Title used for the browser tab, search engine results, and social share previews. Falls back to Hero Headline if left blank.
+   */
+  metaTitle?: string | null;
+  /**
+   * Description used for search engine results and social share previews. Falls back to Hero Bio if left blank.
+   */
+  metaDescription?: string | null;
+  /**
+   * Primary headline displayed in the hero section on the homepage.
+   */
   headline: string;
+  /**
+   * Introductory bio displayed in the hero section.
+   */
   bio: string;
   /**
    * Logo shown in the header navigation. Falls back to the initials badge if left blank.
@@ -833,6 +847,10 @@ export interface GlobalSetting {
   resumePDF?: (number | null) | Media;
   contactDetails?: {
     email?: string | null;
+    /**
+     * Optional second contact email (e.g. info@...), shown alongside the primary email.
+     */
+    secondaryEmail?: string | null;
     phone?: string | null;
     /**
      * Number used for the "Chat on WhatsApp" button, in international format (e.g. +254701048045). Falls back to Phone if left blank.
@@ -883,6 +901,8 @@ export interface PrivacyPolicy {
  * via the `definition` "global-settings_select".
  */
 export interface GlobalSettingsSelect<T extends boolean = true> {
+  metaTitle?: T;
+  metaDescription?: T;
   headline?: T;
   bio?: T;
   logo?: T;
@@ -894,6 +914,7 @@ export interface GlobalSettingsSelect<T extends boolean = true> {
     | T
     | {
         email?: T;
+        secondaryEmail?: T;
         phone?: T;
         whatsapp?: T;
         whatsappMessage?: T;

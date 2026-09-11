@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "generatedAt": "2026-09-03T11:45:09.502Z",
+  "methodology": {
+    "name": "WCAG-EM-inspired evaluation scope",
+    "conformanceClaim": false,
+    "note": "This manifest records what was included in the automated and assisted review. It is evidence for reproducibility, not a WCAG conformance statement."
+  },
+  "tool": {
+    "name": "a11y-shiftleft-cli",
+    "version": "0.9.4",
+    "nodeVersion": "v22.22.0"
+  },
+  "target": {
+    "standard": {
+      "id": "wcag22-aa",
+      "label": "WCAG 2.2 Level AA support mode",
+      "wcagVersion": "2.2",
+      "wcagLevel": "AA",
+      "automatedCoverage": "partial",
+      "requiresManualReview": true,
+      "evidenceGaps": [
+        "Manual screen reader and keyboard task completion evidence",
+        "Content clarity, plain language, and task usability review",
+        "Media transcript, caption quality, audio description, and flashing review"
+      ]
+    },
+    "framework": "react",
+    "urlsRequested": [
+      "http://localhost:3000/",
+      "http://localhost:3000/contact",
+      "http://localhost:3000/services",
+      "http://localhost:3000/projects",
+      "http://localhost:3000/projects/canex-creative-africa-nexus",
+      "http://localhost:3000/projects/uzapoint-mobile-and-web-pos-erp",
+      "http://localhost:3000/projects/the-actuarial-society-of-kenya",
+      "http://localhost:3000/projects/citizen-engagement-platform-auda-nepad",
+      "http://localhost:3000/projects/devske-developer-community-platform",
+      "http://localhost:3000/privacy-policy",
+      "http://localhost:3000/projects/iatf-africa-international-trade-platform",
+      "http://localhost:3000/projects/tuitunze-jamii-community-empowerment"
+    ]
+  },
+  "sample": {
+    "strategy": "browser-exploration",
+    "includedUrls": [
+      "http://localhost:3000/",
+      "http://localhost:3000/contact",
+      "http://localhost:3000/services",
+      "http://localhost:3000/projects",
+      "http://localhost:3000/projects/canex-creative-africa-nexus",
+      "http://localhost:3000/projects/uzapoint-mobile-and-web-pos-erp",
+      "http://localhost:3000/projects/the-actuarial-society-of-kenya",
+      "http://localhost:3000/projects/citizen-engagement-platform-auda-nepad",
+      "http://localhost:3000/projects/devske-developer-community-platform",
+      "http://localhost:3000/privacy-policy",
+      "http://localhost:3000/projects/iatf-africa-international-trade-platform",
+      "http://localhost:3000/projects/tuitunze-jamii-community-empowerment"
+    ],
+    "discoveredUrls": [
+      "http://localhost:3000/",
+      "http://localhost:3000/contact",
+      "http://localhost:3000/services",
+      "http://localhost:3000/projects",
+      "http://localhost:3000/projects/canex-creative-africa-nexus",
+      "http://localhost:3000/projects/uzapoint-mobile-and-web-pos-erp",
+      "http://localhost:3000/projects/the-actuarial-society-of-kenya",
+      "http://localhost:3000/projects/citizen-engagement-platform-auda-nepad",
+      "http://localhost:3000/projects/devske-developer-community-platform",
+      "http://localhost:3000/privacy-policy",
+      "http://localhost:3000/projects/iatf-africa-international-trade-platform",
+      "http://localhost:3000/projects/tuitunze-jamii-community-empowerment"
+    ],
+    "statesVisited": 31,
+    "maxDepth": 2,
+    "maxStates": 20,
+    "representativeStates": [
+      {
+        "id": "state-1",
+        "label": "Initial page",
+        "url": "http://localhost:3000/",
+        "depth": 0,
+        "title": "Senior Full-Stack Software Engineer & Data Analyst",
+        "findingCount": 22
+      },
+      {
+        "id": "state-2",
+        "label": "Initial page",
+        "url": "http://localhost:3000/",
+        "depth": 0,
+        "title": "Senior Full-Stack Software Engineer & Data Analyst",
+        "findingCount": 20
+      },
+      {
+        "id": "state-22",
+        "label": "Click: Open Next.js Dev Tools",
+        "url": "http://localhost:3000/services",
+        "depth": 2,
+        "title": "Services · Senior Full-Stack Software Engineer & Data Analyst",
+        "findingCount": 12
+      },
+      {
+        "id": "state-27",
+        "label": "Click: Open Next.js Dev Tools",
+        "url": "http://localhost:3000/projects/canex-creative-africa-nexus",
+        "depth": 2,
+        "title": "CANEX - Creative Africa Nexus · Senior Full-Stack Software Engineer & Data Analyst",
+        "findingCount": 12
+      },
+      {
+        "id": "state-28",
+        "label": "Click: Open Next.js Dev Tools",
+        "url": "http://localhost:3000/projects/uzapoint-mobile-and-web-pos-erp",
+        "depth": 2,
+        "title": "Uzapoint - Mobile and Web POS & ERP · Senior Full-Stack Software Engineer & Data Analyst",
+        "findingCount": 12
+      },
+      {
+        "id": "state-29",
+        "label": "Click: Open Next.js Dev Tools",
+        "url": "http://localhost:3000/projects/the-actuarial-society-of-kenya",
+        "depth": 2,
+        "title": "The Actuarial Society of Kenya · Senior Full-Stack Software Engineer & Data Analyst",
+        "findingCount": 12
+      },
+      {
+        "id": "state-30",
+        "label": "Click: Open Next.js Dev Tools",
+        "url": "http://localhost:3000/projects/citizen-engagement-platform-auda-nepad",
+        "depth": 2,
+        "title": "Citizen Engagement Platform - AUDA-NEPAD · Senior Full-Stack Software Engineer & Data Analyst",
+        "findingCount": 12
+      },
+      {
+        "id": "state-31",
+        "label": "Click: Open Next.js Dev Tools",
+        "url": "http://localhost:3000/projects/devske-developer-community-platform",
+        "depth": 2,
+        "title": "DevsKe - Developer Community Platform · Senior Full-Stack Software Engineer & Data Analyst",
+        "findingCount": 12
+      },
+      {
+        "id": "state-3",
+        "label": "Navigate: Contact",
+        "url": "http://localhost:3000/contact",
+        "depth": 1,
+        "title": "Contact · Senior Full-Stack Software Engineer & Data Analyst",
+        "findingCount": 8
+      },
+      {
+        "id": "state-21",
+        "label": "Click: Open Next.js Dev Tools",
+        "url": "http://localhost:3000/contact",
+        "depth": 2,
+        "title": "Contact · Senior Full-Stack Software Engineer & Data Analyst",
+        "findingCount": 8
+      }
+    ]
+  },
+  "evidence": {
+    "automatedSources": [
+      "axe",
+      "forced-colors",
+      "image-quality",
+      "keyboard",
+      "layout",
+      "orchestrator"
+    ],
+    "visualExploration": true,
+    "keyboardTraversal": true,
+    "lighthouseComparison": false,
+    "manualChecklist": true
+  },
+  "reviewStatus": {
+    "automatedFindings": 189,
+    "manualReviewItems": 30,
+    "manualReviewCompleted": 0,
+    "manualStepRecords": 104,
+    "manualStepsCompleted": 0,
+    "manualTaskEvidenceAttachments": 0,
+    "manualRedactedTaskEvidence": 0,
+    "manualTemporaryAcceptances": 0,
+    "manualTemporaryAcceptancesExpiringSoon": 0,
+    "needsHumanEvaluation": true
+  },
+  "limitations": [
+    "Automated findings do not prove full WCAG conformance.",
+    "Manual review is required for criteria involving meaning, task completion, assistive-technology announcements, media quality, cognitive clarity, and product-specific context.",
+    "Only configured URLs and safely discovered same-origin states are included.",
+    "Destructive, account, payment, permission, cookie-changing, upload, camera, and microphone actions are blocked or skipped by default."
+  ]
+}

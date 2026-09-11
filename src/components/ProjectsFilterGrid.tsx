@@ -73,11 +73,11 @@ export function ProjectsFilterGrid({ projects }: { projects: Project[] }) {
                 </Link>
               ) : null}
               <div className="p-6">
-                <h3 className="text-xl font-semibold">
+                <h2 className="text-xl font-semibold">
                   <Link href={`/projects/${project.slug}`} className="hover:text-accent">
                     {project.title}
                   </Link>
-                </h3>
+                </h2>
                 <p className="mt-2 text-muted">{project.description}</p>
                 {project.techStack?.length ? (
                   <ul className="mt-4 flex flex-wrap gap-2">

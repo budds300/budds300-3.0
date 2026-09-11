@@ -14,7 +14,11 @@ export function Footer({ settings }: { settings: GlobalSetting | null }) {
             Privacy Policy
           </Link>
           {contact?.email ? (
-            <a href={`mailto:${contact.email}`} className="hover:text-foreground">
+            <a
+              href={`mailto:${contact.email}`}
+              aria-label={`Email ${contact.email}`}
+              className="hover:text-foreground"
+            >
               Email
             </a>
           ) : null}

@@ -1,0 +1,396 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - link [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "logo" [ref=e5]
+      - button "Open menu" [ref=e7]
+    - generic:
+      - list:
+        - listitem:
+          - link:
+            - /url: /#home
+            - text: Home
+        - listitem:
+          - link:
+            - /url: /#services
+            - text: Services
+        - listitem:
+          - link:
+            - /url: /#projects
+            - text: Work
+        - listitem:
+          - link:
+            - /url: /#clients
+            - text: Clients
+        - listitem:
+          - link:
+            - /url: /#testimonials
+            - text: Reviews
+        - listitem:
+          - link:
+            - /url: /contact
+            - text: Contact
+        - listitem:
+          - link:
+            - /url: /contact
+            - text: Let's Talk
+  - main [ref=e12]:
+    - generic [ref=e13]:
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - generic [ref=e17]: Available for new projects
+          - heading "Senior Full-Stack Software Engineer & Data Analyst" [level=1] [ref=e20]
+          - paragraph [ref=e22]: Senior Full-Stack Software Engineer with 6+ years of experience building scalable enterprise platforms, e-commerce systems, and digital products across Africa. Specialising in modern full-stack development, system architecture, automation, and secure integrations.
+          - generic [ref=e23]:
+            - link "Chat on WhatsApp" [ref=e24] [cursor=pointer]:
+              - /url: https://wa.me/2540114271713?text=Hi%20Tamminga%2C%20I'd%20like%20to%20talk%20about%20a%20project.
+            - link "See Work" [ref=e27] [cursor=pointer]:
+              - /url: "#projects"
+        - generic [ref=e28]:
+          - generic [ref=e29]: 5+ Years
+          - img "Verification test" [ref=e32]
+      - generic [ref=e35]:
+        - generic [ref=e37]:
+          - img "about" [ref=e40]
+          - generic [ref=e44]:
+            - generic [ref=e45]: Why Chose Us
+            - heading "Built for clarity, shipped for speed" [level=2] [ref=e46]
+            - paragraph [ref=e47]: I partner directly with founders and teams to turn ideas into reliable software — clear communication, sensible architecture, and code that's easy to hand off.
+            - link "Read More" [ref=e48] [cursor=pointer]:
+              - /url: /contact
+        - generic [ref=e51]:
+          - generic [ref=e52]:
+            - generic [ref=e53]:
+              - generic [ref=e54]: 0+
+              - paragraph [ref=e56]: Years ofExperience
+            - 'link "For any Help: hello@tammingabudds.com" [ref=e58] [cursor=pointer]':
+              - /url: mailto:hello@tammingabudds.com
+              - generic [ref=e63]:
+                - generic [ref=e64]: "For any Help:"
+                - generic [ref=e65]: hello@tammingabudds.com
+          - generic [ref=e66]:
+            - link "View All →" [ref=e68] [cursor=pointer]:
+              - /url: /services
+            - generic [ref=e69]:
+              - generic [ref=e70]:
+                - paragraph [ref=e75]: Web Development
+                - paragraph [ref=e76]: Production-ready web applications built with Next.js, React, Vue.js, and Laravel — scaling from lean MVPs to enterprise-grade platforms.
+              - generic [ref=e77]:
+                - paragraph [ref=e82]: Business Automation
+                - paragraph [ref=e83]: Custom scripts, integrations, and internal tools that eliminate repetitive manual work and streamline business processes.
+              - generic [ref=e84]:
+                - paragraph [ref=e88]: Design & UI/UX
+                - paragraph [ref=e89]: Clean, high-contrast interfaces and reusable design systems built in Figma that make products feel intentional and easy to use.
+              - generic [ref=e90]:
+                - paragraph [ref=e96]: E-commerce & Payments
+                - paragraph [ref=e97]: Storefronts and checkout flows built for conversion, with secure payment integrations for local and global markets.
+      - generic [ref=e98]:
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - generic [ref=e101]: Portfolio
+            - heading "Featured Projects" [level=2] [ref=e102]
+          - link "View All →" [ref=e103] [cursor=pointer]:
+            - /url: /projects
+        - generic [ref=e104]:
+          - article [ref=e105]:
+            - link [ref=e106] [cursor=pointer]:
+              - /url: /projects/canex-creative-africa-nexus
+              - img "CANEX WKND 2026 homepage screenshot" [ref=e107]
+            - generic [ref=e108]:
+              - heading [level=3] [ref=e109]:
+                - link "CANEX - Creative Africa Nexus" [ref=e110] [cursor=pointer]:
+                  - /url: /projects/canex-creative-africa-nexus
+              - paragraph [ref=e111]: Digital platform for CANEX (Creative Africa Nexus), Afreximbank's programme championing Africa's creative and cultural industries — a creatives directory, learning hub, and monetization tools, plus registration for the annual CANEX WKND festival.
+              - list [ref=e112]:
+                - listitem [ref=e113]: Web Development
+                - listitem [ref=e114]: Creative Economy
+                - listitem [ref=e115]: Events Platform
+                - listitem [ref=e116]: Directory
+              - generic [ref=e117]:
+                - link "Case Study" [ref=e118] [cursor=pointer]:
+                  - /url: /projects/canex-creative-africa-nexus
+                - link "Live Demo" [ref=e119] [cursor=pointer]:
+                  - /url: https://canex.africa/
+          - article [ref=e120]:
+            - link [ref=e121] [cursor=pointer]:
+              - /url: /projects/uzapoint-mobile-and-web-pos-erp
+              - img "Uzapoint POS & ERP homepage screenshot" [ref=e122]
+            - generic [ref=e123]:
+              - heading [level=3] [ref=e124]:
+                - link "Uzapoint - Mobile and Web POS & ERP" [ref=e125] [cursor=pointer]:
+                  - /url: /projects/uzapoint-mobile-and-web-pos-erp
+              - paragraph [ref=e126]: Microservices-based POS and ERP ecosystem for retail and hospitality businesses, covering operations management, payments, and customer experience.
+              - list [ref=e127]:
+                - listitem [ref=e128]: Laravel
+                - listitem [ref=e129]: Vue
+                - listitem [ref=e130]: Microservices
+                - listitem [ref=e131]: Payment Integration
+              - generic [ref=e132]:
+                - link "Case Study" [ref=e133] [cursor=pointer]:
+                  - /url: /projects/uzapoint-mobile-and-web-pos-erp
+                - link "Live Demo" [ref=e134] [cursor=pointer]:
+                  - /url: https://uzapoint.com/ke/
+          - article [ref=e135]:
+            - link [ref=e136] [cursor=pointer]:
+              - /url: /projects/the-actuarial-society-of-kenya
+              - img "The Actuarial Society of Kenya homepage screenshot" [ref=e137]
+            - generic [ref=e138]:
+              - heading [level=3] [ref=e139]:
+                - link "The Actuarial Society of Kenya" [ref=e140] [cursor=pointer]:
+                  - /url: /projects/the-actuarial-society-of-kenya
+              - paragraph [ref=e141]: Membership and conference registration platform connecting 400+ actuarial professionals and students across East Africa, with integrated payment processing.
+              - list [ref=e142]:
+                - listitem [ref=e143]: Laravel/PHP
+                - listitem [ref=e144]: UI/UX Design
+                - listitem [ref=e145]: Payment Integration
+              - generic [ref=e146]:
+                - link "Case Study" [ref=e147] [cursor=pointer]:
+                  - /url: /projects/the-actuarial-society-of-kenya
+                - link "Live Demo" [ref=e148] [cursor=pointer]:
+                  - /url: https://www.actuarieskenya.or.ke/
+          - article [ref=e149]:
+            - link [ref=e150] [cursor=pointer]:
+              - /url: /projects/citizen-engagement-platform-auda-nepad
+              - img "Citizen Engagement Platform AUDA-NEPAD homepage screenshot" [ref=e151]
+            - generic [ref=e152]:
+              - heading [level=3] [ref=e153]:
+                - link "Citizen Engagement Platform - AUDA-NEPAD" [ref=e154] [cursor=pointer]:
+                  - /url: /projects/citizen-engagement-platform-auda-nepad
+              - paragraph [ref=e155]: Multi-language platform built for the African Union’s development agency, enabling policy engagement and discussion for over 100,000 users across Africa.
+              - list [ref=e156]:
+                - listitem [ref=e157]: Figma
+                - listitem [ref=e158]: System Revamp
+                - listitem [ref=e159]: Multi-language
+              - generic [ref=e160]:
+                - link "Case Study" [ref=e161] [cursor=pointer]:
+                  - /url: /projects/citizen-engagement-platform-auda-nepad
+                - link "Live Demo" [ref=e162] [cursor=pointer]:
+                  - /url: https://citizenengagement.nepad.org/
+          - article [ref=e163]:
+            - link [ref=e164] [cursor=pointer]:
+              - /url: /projects/devske-developer-community-platform
+              - img "DevsKe - Developer Community Platform cover image" [ref=e165]
+            - generic [ref=e166]:
+              - heading [level=3] [ref=e167]:
+                - link "DevsKe - Developer Community Platform" [ref=e168] [cursor=pointer]:
+                  - /url: /projects/devske-developer-community-platform
+              - paragraph [ref=e169]: Community platform for Kenya’s developer ecosystem, serving 5,000+ developers with opportunity discovery, knowledge sharing, and real-time community features.
+              - list [ref=e170]:
+                - listitem [ref=e171]: Laravel/PHP
+                - listitem [ref=e172]: Real-time Features
+                - listitem [ref=e173]: API Integration
+              - link "Case Study" [ref=e175] [cursor=pointer]:
+                - /url: /projects/devske-developer-community-platform
+          - article [ref=e176]:
+            - link [ref=e177] [cursor=pointer]:
+              - /url: /projects/iatf-africa-international-trade-platform
+              - img "IATF Africa homepage screenshot" [ref=e178]
+            - generic [ref=e179]:
+              - heading [level=3] [ref=e180]:
+                - link "IATF Africa - International Trade Platform" [ref=e181] [cursor=pointer]:
+                  - /url: /projects/iatf-africa-international-trade-platform
+              - paragraph [ref=e182]: Enterprise trade-facilitation platform built for the African Union, enabling businesses across Africa to discover partnerships, analyze markets, and manage cross-border commerce.
+              - list [ref=e183]:
+                - listitem [ref=e184]: Next.js
+                - listitem [ref=e185]: Spring Boot
+                - listitem [ref=e186]: MedusaJS
+                - listitem [ref=e187]: CMS
+              - generic [ref=e188]:
+                - link "Case Study" [ref=e189] [cursor=pointer]:
+                  - /url: /projects/iatf-africa-international-trade-platform
+                - link "Live Demo" [ref=e190] [cursor=pointer]:
+                  - /url: https://iatf.africa/
+      - generic [ref=e192]:
+        - generic [ref=e193]: Stack
+        - heading "Our Tech Stack" [level=2] [ref=e194]
+        - paragraph [ref=e195]: The modern, reliable tools I use to build products that are fast, secure, and ready to scale.
+        - generic [ref=e196]:
+          - generic [ref=e197]: React
+          - generic [ref=e202]: Next.js
+          - generic [ref=e207]: TypeScript
+          - generic [ref=e212]: Tailwind CSS
+          - generic [ref=e217]: Node.js
+          - generic [ref=e222]: PostgreSQL
+          - generic [ref=e227]: Payload CMS
+          - generic [ref=e232]: Docker
+          - generic [ref=e237]: Vercel
+          - generic [ref=e242]: GitHub Actions
+          - generic [ref=e247]: Neon
+          - generic [ref=e252]: Git
+          - generic [ref=e257]: Figma
+          - generic [ref=e262]: Vitest
+          - generic [ref=e267]: Playwright
+          - generic [ref=e272]: NestJS
+          - generic [ref=e277]: Laravel
+          - generic [ref=e282]: AWS
+          - generic [ref=e287]: CI/CD
+      - generic [ref=e296]:
+        - generic [ref=e298]:
+          - generic [ref=e299]:
+            - generic [ref=e300]: Client
+            - heading "Companies I have worked with" [level=2] [ref=e301]
+          - paragraph [ref=e302]: A few teams and businesses I have helped ship better digital products.
+        - generic [ref=e305]:
+          - link "qhala" [ref=e306] [cursor=pointer]:
+            - /url: https://qhala.com/
+            - img "qhala"
+          - link "Afrexim bank" [ref=e307] [cursor=pointer]:
+            - /url: https://www.afreximbank.com/
+            - img "Afrexim bank"
+          - link "task" [ref=e308] [cursor=pointer]:
+            - /url: https://www.actuarieskenya.or.ke/
+            - img "task"
+          - link "auda-nepad" [ref=e309] [cursor=pointer]:
+            - /url: https://www.nepad.org/
+            - img "auda-nepad"
+          - link "devsKe" [ref=e310] [cursor=pointer]:
+            - /url: https://ke.devsconnect.africa/
+            - img "devsKe"
+          - generic [ref=e311]:
+            - img "mobidev"
+          - link [ref=e312] [cursor=pointer]:
+            - /url: https://qhala.com/
+          - link [ref=e313] [cursor=pointer]:
+            - /url: https://www.afreximbank.com/
+          - link [ref=e314] [cursor=pointer]:
+            - /url: https://www.actuarieskenya.or.ke/
+          - link [ref=e315] [cursor=pointer]:
+            - /url: https://www.nepad.org/
+          - link [ref=e316] [cursor=pointer]:
+            - /url: https://ke.devsconnect.africa/
+      - generic [ref=e318]:
+        - generic [ref=e319]:
+          - generic [ref=e320]:
+            - generic [ref=e321]: Pricing
+            - heading "Services & Pricing" [level=2] [ref=e322]
+          - link "View All →" [ref=e323] [cursor=pointer]:
+            - /url: /services
+        - generic [ref=e324]:
+          - generic [ref=e325]:
+            - heading "Scale" [level=3] [ref=e326]
+            - paragraph [ref=e327]:
+              - text: from
+              - generic [ref=e328]: KSh 60,000
+              - generic [ref=e329]: one-time
+            - list [ref=e330]:
+              - listitem [ref=e331]: Everything in Business
+              - listitem [ref=e332]: Full e-commerce store with unlimited products
+              - listitem [ref=e333]: M-Pesa and card payments integration
+              - listitem [ref=e334]: Advanced marketing and automation tools
+              - listitem [ref=e335]: CRM integration and customer management
+              - listitem [ref=e336]: Premium security and backup system
+              - listitem [ref=e337]: 1 year priority support
+              - listitem [ref=e338]: Unlimited revisions
+            - link "Book Now" [ref=e339] [cursor=pointer]:
+              - /url: /#contact
+          - generic [ref=e340]:
+            - heading "Business" [level=3] [ref=e341]
+            - paragraph [ref=e342]:
+              - text: from
+              - generic [ref=e343]: KSh 80,000
+              - generic [ref=e344]: one-time
+            - list [ref=e345]:
+              - listitem [ref=e346]: Everything in Starter
+              - listitem [ref=e347]: Up to 10 pages with blog
+              - listitem [ref=e348]: CMS integration
+              - listitem [ref=e349]: Advanced SEO and analytics setup
+              - listitem [ref=e350]: Social media and marketing tools
+              - listitem [ref=e351]: Enhanced security features
+              - listitem [ref=e352]: 3 months maintenance and support
+              - listitem [ref=e353]: 10 free revisions
+            - link "Book Now" [ref=e354] [cursor=pointer]:
+              - /url: /#contact
+          - generic [ref=e355]:
+            - heading "Starter" [level=3] [ref=e356]
+            - paragraph [ref=e357]:
+              - text: from
+              - generic [ref=e358]: KSh 30,000
+              - generic [ref=e359]: one-time
+            - list [ref=e360]:
+              - listitem [ref=e361]: 5-page custom website (Home, About, Services, Blog, Contact)
+              - listitem [ref=e362]: Mobile responsive design
+              - listitem [ref=e363]: Contact form and basic SEO setup
+              - listitem [ref=e364]: Social media integration
+              - listitem [ref=e365]: Basic security setup
+              - listitem [ref=e366]: 1 month maintenance and support
+              - listitem [ref=e367]: 2 free revisions
+            - link "Book Now" [ref=e368] [cursor=pointer]:
+              - /url: /#contact
+      - generic [ref=e369]:
+        - generic [ref=e370]:
+          - generic [ref=e371]:
+            - generic [ref=e372]: Career
+            - heading "Experience" [level=2] [ref=e373]
+          - link "View All →" [ref=e374] [cursor=pointer]:
+            - /url: /about
+        - list [ref=e375]:
+          - listitem [ref=e376]:
+            - generic [ref=e378]:
+              - heading "Software Engineer · Qhala" [level=3] [ref=e379]
+              - paragraph [ref=e380]: Jan 2024 – Present
+              - list [ref=e381]:
+                - listitem [ref=e382]: Architected and delivered a community engagement platform that streamlined onboarding and interaction for thousands of users, strengthening product adoption and retention.
+                - listitem [ref=e383]: Partnered with cross-functional product and design teams under an agile workflow to ship features on schedule and continuously improve platform reliability.
+          - listitem [ref=e384]:
+            - generic [ref=e386]:
+              - heading "Full Stack Developer · Uzapoint Technologies" [level=3] [ref=e387]
+              - paragraph [ref=e388]: Jan 2024 – Jan 2025
+              - list [ref=e389]:
+                - listitem [ref=e390]: Engineered a microservices architecture powering ERP and POS systems used by retail and hospitality businesses, improving system scalability and maintainability.
+                - listitem [ref=e391]: Improved platform usability and visual design, enhancing the end-to-end user experience and contributing to measurable growth in platform adoption.
+      - generic [ref=e392]:
+        - generic [ref=e393]:
+          - generic [ref=e394]:
+            - generic [ref=e395]: Clients Testimonial
+            - heading "What My Clients Say" [level=2] [ref=e396]
+          - link "View All →" [ref=e397] [cursor=pointer]:
+            - /url: /about
+        - generic [ref=e399]:
+          - generic [ref=e400]:
+            - generic [ref=e401]: "01"
+            - figure [ref=e402]:
+              - img "5 out of 5 stars" [ref=e403]
+              - blockquote [ref=e414]: “Tamminga delivered our project on time and exceeded our expectations. His technical expertise and problem-solving skills were invaluable to our business.”
+              - generic [ref=e415]:
+                - generic [ref=e416]: K
+                - generic [ref=e417]:
+                  - paragraph [ref=e418]: Kibet Kigen
+                  - paragraph [ref=e419]: Founder, Safari Wheels
+              - paragraph [ref=e420]: "Reviews on: LinkedIn"
+          - generic [ref=e421]:
+            - generic [ref=e422]:
+              - button "01 Kibet Kigen" [ref=e423]:
+                - generic [ref=e424]: "01"
+                - paragraph [ref=e425]: Kibet Kigen
+              - button "02 Lincon Njogu" [ref=e426]:
+                - generic [ref=e427]: "02"
+                - paragraph [ref=e428]: Lincon Njogu
+              - button "03 Moses Kioko" [ref=e429]:
+                - generic [ref=e430]: "03"
+                - paragraph [ref=e431]: Moses Kioko
+            - generic [ref=e432]:
+              - button "Previous testimonial" [ref=e433]
+              - button "Next testimonial" [ref=e436]
+      - generic [ref=e443]:
+        - heading "Have a project in mind? Let's build it." [level=2] [ref=e444]
+        - list [ref=e445]:
+          - listitem [ref=e446]: Fast turnarounds
+          - listitem [ref=e447]: Clear communication
+        - link "Start a Conversation" [ref=e448] [cursor=pointer]:
+          - /url: /contact
+  - contentinfo [ref=e451]:
+    - generic [ref=e452]:
+      - paragraph [ref=e453]: © 2026 All rights reserved.
+      - generic [ref=e454]:
+        - link "Privacy Policy" [ref=e455] [cursor=pointer]:
+          - /url: /privacy-policy
+        - link "Email hello@tammingabudds.com" [ref=e456] [cursor=pointer]:
+          - /url: mailto:hello@tammingabudds.com
+          - text: Email
+        - link "GitHub" [ref=e457] [cursor=pointer]:
+          - /url: https://github.com/budds300/budds300
+        - link "LinkedIn" [ref=e458] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/tamminga-budds/
+  - button "Open Next.js Dev Tools" [ref=e464] [cursor=pointer]
+  - alert [ref=e468]
