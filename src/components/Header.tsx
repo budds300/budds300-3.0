@@ -63,10 +63,6 @@ export function Header({ logo }: { logo?: HeaderLogo | null }) {
   }, [pathname, sectionIds]);
 
   useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
     if (!menuOpen) return;
 
     const onKeyDown = (event: KeyboardEvent) => {

@@ -5,7 +5,7 @@ export const Projects: CollectionConfig = {
   slug: "projects",
   admin: {
     useAsTitle: "title",
-    defaultColumns: ["title", "featured", "liveUrl"],
+    defaultColumns: ["title", "order", "featured", "liveUrl"],
   },
   access: {
     read: () => true,
@@ -67,6 +67,16 @@ export const Projects: CollectionConfig = {
       name: "featured",
       type: "checkbox",
       defaultValue: false,
+    },
+    {
+      name: "order",
+      type: "number",
+      defaultValue: 0,
+      admin: {
+        description:
+          "Lower numbers appear first. Use this to manually order projects across the site.",
+        position: "sidebar",
+      },
     },
   ],
 };

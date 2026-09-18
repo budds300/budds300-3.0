@@ -28,7 +28,11 @@ export default async function Home() {
     await Promise.all([
       getGlobalSettings(),
       getDocs<ServiceOffering>({ collection: "service-offerings", sort: "order", limit: 4 }),
-      getDocs<Project>({ collection: "projects", sort: "-featured", limit: 6 }),
+      getDocs<Project>({
+        collection: "projects",
+        sort: ["order", "-featured", "title"],
+        limit: 6,
+      }),
       getDocs<TechStackItem>({ collection: "tech-stack-items", sort: "order", limit: 40 }),
       getDocs<Client>({ collection: "clients", sort: "order", limit: 20 }),
       getDocs<Service>({ collection: "services", limit: 3 }),

@@ -251,6 +251,10 @@ export interface Project {
   liveUrl?: string | null;
   githubUrl?: string | null;
   featured?: boolean | null;
+  /**
+   * Lower numbers appear first. Use this to manually order projects across the site.
+   */
+  order?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -642,6 +646,7 @@ export interface ProjectsSelect<T extends boolean = true> {
   liveUrl?: T;
   githubUrl?: T;
   featured?: T;
+  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }

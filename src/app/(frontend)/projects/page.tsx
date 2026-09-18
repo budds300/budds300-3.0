@@ -15,7 +15,7 @@ export const revalidate = 300;
 export default async function ProjectsPage() {
   const projects = await getDocs<Project>({
     collection: "projects",
-    sort: "-featured",
+    sort: ["order", "-featured", "title"],
     limit: 100,
   });
 
