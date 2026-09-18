@@ -266,6 +266,10 @@ export interface Service {
   id: number;
   tierName: string;
   price: number;
+  /**
+   * Currency used to display this service price.
+   */
+  currency: 'KES' | 'USD' | 'EUR' | 'GBP';
   billingInterval: 'one-time' | 'monthly' | 'hourly';
   features?:
     | {
@@ -657,6 +661,7 @@ export interface ProjectsSelect<T extends boolean = true> {
 export interface ServicesSelect<T extends boolean = true> {
   tierName?: T;
   price?: T;
+  currency?: T;
   billingInterval?: T;
   features?:
     | T

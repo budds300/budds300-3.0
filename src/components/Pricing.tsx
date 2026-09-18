@@ -4,14 +4,27 @@ import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 import { MotionAnchor } from "@/components/motion/MotionButton";
 
 const INTERVAL_LABEL: Record<Service["billingInterval"], string> = {
-  "one-time": "one-time",
+  "one-time": "",
   monthly: "/mo",
   hourly: "/hr",
 };
 
-const KES_FORMATTER = new Intl.NumberFormat("en-KE", {
-  maximumFractionDigits: 0,
-});
+const CURRENCY_LOCALE: Record<NonNullable<Service["currency"]>, string> = {
+  EUR: "en-EU",
+  GBP: "en-GB",
+  KES: "en-KE",
+  USD: "en-US",
+};
+
+function formatPrice(price: number, currency: Service["currency"] = "KES") {
+  const resolvedCurrency = currency || "KES";
+
+  return new Intl.NumberFormat(CURRENCY_LOCALE[resolvedCurrency], {
+    currency: resolvedCurrency,
+    maximumFractionDigits: 0,
+    style: "currency",
+  }).format(price);
+}
 
 export function Pricing({
   services,
@@ -47,6 +60,7 @@ export function Pricing({
       <StaggerGroup className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
         {services.map((service, i) => {
           const highlighted = i === highlightIndex;
+          const intervalLabel = INTERVAL_LABEL[service.billingInterval];
           return (
             <StaggerItem
               key={service.id}
@@ -60,12 +74,14 @@ export function Pricing({
               <p className="mt-4">
                 <span className="text-sm text-muted">from </span>
                 <span className="text-3xl font-extrabold">
-                  KSh {KES_FORMATTER.format(service.price)}
+                  {formatPrice(service.price, service.currency)}
                 </span>
-                <span className="text-base font-normal text-muted">
-                  {" "}
-                  {INTERVAL_LABEL[service.billingInterval]}
-                </span>
+                {intervalLabel ? (
+                  <span className="text-base font-normal text-muted">
+                    {" "}
+                    {intervalLabel}
+                  </span>
+                ) : null}
               </p>
               {!compact && service.features?.length ? (
                 <ul className="mt-6 flex-1 space-y-2 text-sm text-muted">
