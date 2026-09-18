@@ -23,12 +23,45 @@ import { PrivacyPolicy } from "./globals/PrivacyPolicy";
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
+function getDatabaseUri() {
+  const value =
+    process.env.DATABASE_URI ||
+    process.env.POSTGRES_URL ||
+    process.env.POSTGRES_PRISMA_URL;
+
+  if (!value) {
+    throw new Error(
+      "DATABASE_URI environment variable is required. Set it to your full Postgres connection string.",
+    );
+  }
+
+  let parsed: URL;
+  try {
+    parsed = new URL(value);
+  } catch {
+    throw new Error(
+      "DATABASE_URI must be a valid Postgres URL, for example postgresql://user:password@host/database?sslmode=require",
+    );
+  }
+
+  if (!["postgres:", "postgresql:"].includes(parsed.protocol)) {
+    throw new Error("DATABASE_URI must start with postgres:// or postgresql://");
+  }
+
+  if (!parsed.hostname || parsed.hostname === "base") {
+    throw new Error(
+      `DATABASE_URI has an invalid Postgres host "${parsed.hostname}". Check the DATABASE_URI value in your Vercel environment variables.`,
+    );
+  }
+
+  return value;
+}
+
 if (!process.env.PAYLOAD_SECRET) {
   throw new Error("PAYLOAD_SECRET environment variable is required");
 }
-if (!process.env.DATABASE_URI) {
-  throw new Error("DATABASE_URI environment variable is required");
-}
+
+const databaseUri = getDatabaseUri();
 
 export default buildConfig({
   admin: {
@@ -58,7 +91,7 @@ export default buildConfig({
   },
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI,
+      connectionString: databaseUri,
     },
   }),
   sharp,
