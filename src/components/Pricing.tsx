@@ -4,7 +4,7 @@ import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 import { MotionAnchor } from "@/components/motion/MotionButton";
 
 const INTERVAL_LABEL: Record<Service["billingInterval"], string> = {
-  "one-time": "one-time",
+  "one-time": "",
   monthly: "/mo",
   hourly: "/hr",
 };
@@ -60,6 +60,7 @@ export function Pricing({
       <StaggerGroup className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
         {services.map((service, i) => {
           const highlighted = i === highlightIndex;
+          const intervalLabel = INTERVAL_LABEL[service.billingInterval];
           return (
             <StaggerItem
               key={service.id}
@@ -75,10 +76,12 @@ export function Pricing({
                 <span className="text-3xl font-extrabold">
                   {formatPrice(service.price, service.currency)}
                 </span>
-                <span className="text-base font-normal text-muted">
-                  {" "}
-                  {INTERVAL_LABEL[service.billingInterval]}
-                </span>
+                {intervalLabel ? (
+                  <span className="text-base font-normal text-muted">
+                    {" "}
+                    {intervalLabel}
+                  </span>
+                ) : null}
               </p>
               {!compact && service.features?.length ? (
                 <ul className="mt-6 flex-1 space-y-2 text-sm text-muted">

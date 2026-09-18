@@ -21,7 +21,12 @@ const STATIC_ROUTES: Array<{
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [projects, services, posts] = await Promise.all([
-    getDocs<Project>({ collection: "projects", limit: 200, depth: 0 }),
+    getDocs<Project>({
+      collection: "projects",
+      sort: ["order", "-featured", "title"],
+      limit: 200,
+      depth: 0,
+    }),
     getDocs<ServiceOffering>({
       collection: "service-offerings",
       limit: 200,
