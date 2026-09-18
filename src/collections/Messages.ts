@@ -18,6 +18,7 @@ export const Messages: CollectionConfig = {
       name: "name",
       type: "text",
       required: true,
+      maxLength: 80,
     },
     {
       name: "email",
@@ -27,11 +28,13 @@ export const Messages: CollectionConfig = {
     {
       name: "budget",
       type: "text",
+      maxLength: 80,
     },
     {
       name: "message",
       type: "textarea",
       required: true,
+      maxLength: 2000,
     },
   ],
 };

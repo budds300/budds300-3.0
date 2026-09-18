@@ -17,6 +17,8 @@ function ArrowIcon() {
 const FIELD_CLASSES =
   "mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/30";
 
+const CONTACT_FORM_STARTED_AT = Date.now();
+
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
 
@@ -61,6 +63,19 @@ export function ContactForm() {
           aria-hidden
         />
         <form onSubmit={handleSubmit} className="relative space-y-5">
+          <input
+            type="text"
+            name="company"
+            tabIndex={-1}
+            autoComplete="off"
+            className="hidden"
+            aria-hidden="true"
+          />
+          <input
+            type="hidden"
+            name="formStartedAt"
+            value={CONTACT_FORM_STARTED_AT}
+          />
           <div className="grid gap-5 sm:grid-cols-2">
             <div>
               <label htmlFor="name" className="text-sm font-medium text-muted">
