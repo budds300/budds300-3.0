@@ -1,5 +1,5 @@
 import { cache } from "react";
-import type { CollectionSlug, SelectType, Where } from "payload";
+import type { CollectionSlug, SelectType, Sort, Where } from "payload";
 import { unstable_cache } from "next/cache";
 import { getPayloadClient } from "@/lib/payload";
 import type { Project, ServiceOffering, BlogPost } from "@/payload-types";
@@ -11,7 +11,7 @@ type FindDocsArgs = {
   depth?: number;
   limit?: number;
   select?: SelectType;
-  sort?: string;
+  sort?: Sort;
   where?: Where;
 };
 

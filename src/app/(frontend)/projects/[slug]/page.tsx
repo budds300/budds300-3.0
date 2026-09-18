@@ -35,6 +35,7 @@ export default async function ProjectDetailPage({
   const others = await getDocs<Project>({
     collection: "projects",
     where: { slug: { not_equals: slug } },
+    sort: ["order", "-featured", "title"],
     limit: 1,
   });
   const next = others[0] ?? null;
