@@ -9,9 +9,22 @@ const INTERVAL_LABEL: Record<Service["billingInterval"], string> = {
   hourly: "/hr",
 };
 
-const KES_FORMATTER = new Intl.NumberFormat("en-KE", {
-  maximumFractionDigits: 0,
-});
+const CURRENCY_LOCALE: Record<NonNullable<Service["currency"]>, string> = {
+  EUR: "en-EU",
+  GBP: "en-GB",
+  KES: "en-KE",
+  USD: "en-US",
+};
+
+function formatPrice(price: number, currency: Service["currency"] = "KES") {
+  const resolvedCurrency = currency || "KES";
+
+  return new Intl.NumberFormat(CURRENCY_LOCALE[resolvedCurrency], {
+    currency: resolvedCurrency,
+    maximumFractionDigits: 0,
+    style: "currency",
+  }).format(price);
+}
 
 export function Pricing({
   services,
@@ -60,7 +73,7 @@ export function Pricing({
               <p className="mt-4">
                 <span className="text-sm text-muted">from </span>
                 <span className="text-3xl font-extrabold">
-                  KSh {KES_FORMATTER.format(service.price)}
+                  {formatPrice(service.price, service.currency)}
                 </span>
                 <span className="text-base font-normal text-muted">
                   {" "}

@@ -20,6 +20,21 @@ export const Services: CollectionConfig = {
       required: true,
     },
     {
+      name: "currency",
+      type: "select",
+      required: true,
+      defaultValue: "KES",
+      options: [
+        { label: "Kenyan Shilling (KES)", value: "KES" },
+        { label: "US Dollar (USD)", value: "USD" },
+        { label: "Euro (EUR)", value: "EUR" },
+        { label: "British Pound (GBP)", value: "GBP" },
+      ],
+      admin: {
+        description: "Currency used to display this service price.",
+      },
+    },
+    {
       name: "billingInterval",
       type: "select",
       required: true,
