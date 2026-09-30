@@ -10,6 +10,7 @@ import { Testimonials } from "@/components/Testimonials";
 import { BlogGrid } from "@/components/BlogGrid";
 import { CtaBanner } from "@/components/CtaBanner";
 import { Clients } from "@/components/Clients";
+import { Faq } from "@/components/Faq";
 import type {
   Client,
   Project,
@@ -52,6 +53,7 @@ export default async function Home() {
 
   return (
     <>
+      <link rel="canonical" href="https://www.tammingabudds.com/" />
       <Hero settings={settings} />
       <SectionDivider />
       <About settings={settings} offerings={offerings} viewAllHref="/services" />
@@ -62,6 +64,7 @@ export default async function Home() {
       <ExperienceTimeline experience={experience} viewAllHref="/about" />
       <Testimonials testimonials={testimonials} viewAllHref="/about" />
       {posts.length > 0 ? <BlogGrid posts={posts} viewAllHref="/blog" /> : null}
+      <Faq />
       <CtaBanner
         heading="Have a project in mind? Let's build it."
         bullets={["Fast turnarounds", "Clear communication"]}

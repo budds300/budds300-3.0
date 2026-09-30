@@ -7,32 +7,37 @@ export function Footer({ settings }: { settings: GlobalSetting | null }) {
 
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-10 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
-        <p>&copy; {year} All rights reserved.</p>
-        <div className="flex gap-4">
-          <Link href="/privacy-policy" className="hover:text-foreground">
-            Privacy Policy
-          </Link>
-          {contact?.email ? (
-            <a
-              href={`mailto:${contact.email}`}
-              aria-label={`Email ${contact.email}`}
-              className="hover:text-foreground"
-            >
-              Email
-            </a>
-          ) : null}
-          {contact?.github ? (
-            <a href={contact.github} className="hover:text-foreground">
-              GitHub
-            </a>
-          ) : null}
-          {contact?.linkedin ? (
-            <a href={contact.linkedin} className="hover:text-foreground">
-              LinkedIn
-            </a>
-          ) : null}
+      <div className="mx-auto flex max-w-5xl flex-col gap-6 px-6 py-10 text-sm text-muted">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <p>&copy; {year} Tamminga Budds. All rights reserved.</p>
+          <div className="flex gap-4">
+            <Link href="/privacy-policy" className="hover:text-foreground">
+              Privacy Policy
+            </Link>
+            {contact?.email ? (
+              <a
+                href={`mailto:${contact.email}`}
+                aria-label={`Email ${contact.email}`}
+                className="hover:text-foreground"
+              >
+                Email
+              </a>
+            ) : null}
+            {contact?.github ? (
+              <a href={contact.github} className="hover:text-foreground">
+                GitHub
+              </a>
+            ) : null}
+            {contact?.linkedin ? (
+              <a href={contact.linkedin} className="hover:text-foreground">
+                LinkedIn
+              </a>
+            ) : null}
+          </div>
         </div>
+        <p className="border-t border-border/40 pt-4 text-xs text-muted/60">
+          Official website of Tamminga Budds — also referenced as Taminga Buds, Tamminga Buds, or Taminga Budds.
+        </p>
       </div>
     </footer>
   );

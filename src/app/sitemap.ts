@@ -3,7 +3,7 @@ import { getDocs } from "@/lib/frontend-data";
 import type { Project, ServiceOffering, BlogPost } from "@/payload-types";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3000";
+  process.env.NEXT_PUBLIC_SERVER_URL || "https://www.tammingabudds.com";
 
 const STATIC_ROUTES: Array<{
   path: string;
