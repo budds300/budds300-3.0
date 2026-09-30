@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3000";
+const PRIMARY_CANONICAL_URL =
+  process.env.NEXT_PUBLIC_CANONICAL_URL || "https://www.tammingabudds.com";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getGlobalSettings();
@@ -27,26 +27,36 @@ export async function generateMetadata(): Promise<Metadata> {
   const title =
     settings?.metaTitle?.trim() ||
     settings?.headline ||
-    "Full-Stack / Software Engineer";
+    "Tamminga Budds | Full-Stack Software Engineer";
   const description =
     settings?.metaDescription?.trim() ||
     settings?.bio ||
-    "Full-stack software engineer building fast, reliable web products.";
+    "Official portfolio of Tamminga Budds (also referenced as Taminga Buds or Tamminga Buds) — Software engineer in Nairobi building enterprise platforms, business systems, and web applications.";
   const favicon =
     settings?.favicon && typeof settings.favicon === "object"
       ? (settings.favicon as Media)
       : null;
 
   return {
-    metadataBase: new URL(SITE_URL),
-    title: { default: title, template: `%s · ${title}` },
+    metadataBase: new URL(PRIMARY_CANONICAL_URL),
+    applicationName: "Tamminga Budds",
+    title: { default: title, template: `%s · Tamminga Budds` },
     description,
-    alternates: { canonical: "/" },
+    keywords: [
+      "Tamminga Budds",
+      "Taminga Buds",
+      "Tamminga Buds",
+      "Taminga Budds",
+      "Software Engineer Nairobi",
+      "Full-Stack Developer",
+      "Web Application Development",
+    ],
     icons: favicon?.url ? { icon: favicon.url } : undefined,
     openGraph: {
+      siteName: "Tamminga Budds",
       title,
       description,
-      url: SITE_URL,
+      url: PRIMARY_CANONICAL_URL,
       type: "website",
     },
     twitter: {
@@ -80,8 +90,10 @@ export default async function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <JsonLd settings={settings} siteUrl={PRIMARY_CANONICAL_URL} />
+      </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <JsonLd settings={settings} siteUrl={SITE_URL} />
         <Header logo={logo} />
         <main className="flex-1">
           <PageTransition>{children}</PageTransition>

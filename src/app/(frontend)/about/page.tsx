@@ -5,6 +5,7 @@ import { TechStackGrid } from "@/components/TechStackGrid";
 import { ExperienceTimeline } from "@/components/ExperienceTimeline";
 import { Testimonials } from "@/components/Testimonials";
 import { CtaBanner } from "@/components/CtaBanner";
+import { Faq } from "@/components/Faq";
 import type {
   ServiceOffering,
   TechStackItem,
@@ -13,7 +14,9 @@ import type {
 } from "@/payload-types";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Tamminga Budds",
+  description:
+    "Learn more about Tamminga Budds (also referenced as Taminga Buds or Tamminga Buds) — Full-stack software engineer in Nairobi building reliable web products.",
   alternates: { canonical: "/about" },
 };
 
@@ -40,6 +43,7 @@ export default async function AboutPage() {
       <TechStackGrid items={techStack} />
       <ExperienceTimeline experience={experience} />
       <Testimonials testimonials={testimonials} />
+      <Faq />
       <CtaBanner
         heading="Like what you see? Let's talk about your project."
         bullets={["Free initial consult", "Response within a day"]}
